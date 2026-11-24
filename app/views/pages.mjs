@@ -147,7 +147,7 @@ const plateHead = (L, key, h1, lead) => {
   const i = PAGES.findIndex((x) => x.key === key);
   const p = PAGES[i];
   return `<header class="wrap plate-head">
-  <div class="ph-copy"><p class="kicker"><span class="dot"></span>${T(L, "Levha", "Plate")} ${num(i + 1)} / ${num(PAGES.length)}</p><h1><span class="grad-text">${h1}</span></h1><p class="lead">${lead}</p></div>
+  <div class="ph-copy"><h1><span class="grad-text">${h1}</span></h1><p class="lead">${lead}</p></div>
   <div class="ph-orbit" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><i class="sat s1"></i><i class="sat s2"></i><i class="sat s3"></i>${u(p.unit, "u unit-big")}</div>
 </header>
 <div class="beam" aria-hidden="true"></div>`;
@@ -160,10 +160,9 @@ function home(L) {
   const portrait = `<img src="${A("assets/img/profile/portre-ceket.jpg")}" alt="${T(L, "Siyah ceketli Yunus Emre Ersoy portresi", "Portrait of Yunus Emre Ersoy in a black jacket")}" width="787" height="768" fetchpriority="high">`;
   const body = `<section class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
-    <p class="kicker"><span class="dot"></span>${T(L, "Bilgisayar Programcılığı · Python · Görsel Tasarım", "Computer Programming · Python · Visual Design")}</p>
     <h1 class="display" id="hero-title">Yunus Emre<br><span class="grad-text">Ersoy</span></h1>
     <div class="divider" aria-hidden="true">${u("diamond")}</div>
-    <p class="role">Akdeniz ${T(L, "Üniversitesi", "University")} · Antalya</p>
+    <p class="role">${T(L, "Bilgisayar Programcılığı · Python · Görsel Tasarım", "Computer Programming · Python · Visual Design")}<br>Akdeniz ${T(L, "Üniversitesi", "University")} · Antalya</p>
     <p class="intro">${T(L,
       "Akdeniz Üniversitesi Bilgisayar Programcılığı bölümünde okuyorum. Python ve yapay zekâya odaklanıyor, boş kalan her saatimi Photoshop'ta renk ve ışıkla geçiriyorum. Burada kod ve tasarım çalışmalarımı, fotoğraflarımı ve yazılarımı bulacaksınız.",
       "I study Computer Programming at Akdeniz University. I focus on Python and artificial intelligence, and spend my spare hours on colour and light in Photoshop. Here you'll find my code and design work, my photos and my writing.")}</p>
@@ -180,12 +179,23 @@ function home(L) {
       <figcaption><span>Yunus Emre Ersoy</span><span>Antalya · 2006</span></figcaption>
     </figure>
   </div>
-  <a class="scroll-cue" href="#pr-title" aria-label="${T(L, "Aşağı kaydır", "Scroll down")}"><span></span></a>
+  <a class="scroll-cue" href="#sc-title" aria-label="${T(L, "Aşağı kaydır", "Scroll down")}"><span></span></a>
 </section>
 <div class="marquee-duo">${marquee(L, "big")}${marquee(L, "alt", [...MQ[L]].reverse())}</div>
 
-<section class="wrap sec bento-home" aria-labelledby="pr-title" data-cms="homeBento">${R.homeBento(L, D)}</section>
-<div class="wrap pr-more glass"><span class="label" data-cms="featuredNote">${R.featuredNote(L, D)}</span><a class="link" href="${href("projects", L)}">${T(L, "Tüm projeler", "All projects")} ${u("diamond")}</a></div>
+<section class="showcase" aria-labelledby="sc-title">
+  <div class="sc-pin">
+    <header class="wrap sc-head">
+      <h2 class="h-section" id="sc-title">${T(L, "Seçili işler", "Selected work")}</h2>
+      <p class="label sc-note" data-cms="featuredNote">${R.featuredNote(L, D)}</p>
+      <a class="link" href="${href("projects", L)}">${T(L, "Tüm projeler", "All projects")} ${u("diamond")}</a>
+    </header>
+    <div class="sc-viewport" tabindex="0" aria-label="${T(L, "Projeler, yatay kaydırılır", "Projects, scrolls sideways")}"><div class="sc-track" data-cms="showcase">${R.showcase(L, D)}</div></div>
+    <div class="wrap sc-foot" aria-hidden="true"><span class="sc-bar"><i></i></span><span class="label sc-hint">${T(L, "Aşağı kaydırdıkça işler yana akar", "Scroll down and the work slides past")}</span></div>
+  </div>
+</section>
+
+<section class="wrap sec home-about" aria-labelledby="pr-title" data-cms="homeBento">${R.homeBento(L, D)}</section>
 
 <section class="wrap sec" aria-labelledby="gal-title">
   ${secHead(`<span id="gal-title">${T(L, "Galeriden kareler", "From the gallery")}</span>`, `<a class="link" href="${href("gallery", L)}"><span>${T(L, "Galeriyi aç", "Open the gallery")} (<span data-cms="galleryCount">${R.galleryCount(L, D)}</span>)</span> ${u("diamond")}</a>`)}
@@ -236,8 +246,8 @@ function about(L) {
 </section>
 
 <section class="wrap sec" style="padding-top:0" id="yetenekler" aria-labelledby="skills-title">
-  ${secHead(`<span id="skills-title">${T(L, "Yetenekler", "Skills")}</span>`, `<span class="label">${T(L, "Kendi değerlendirmem · 100 üzerinden", "Self-assessed · out of 100")}</span>`)}
-  <ul class="skills glass panel" data-cms="skills">${R.skills(L, D)}</ul>
+  ${secHead(`<span id="skills-title">${T(L, "Yetkinlik alanları", "Areas of practice")}</span>`)}
+  <div class="comp-grid" data-cms="competencies">${R.competencies(L, D)}</div>
 </section>
 
 <section class="wrap sec" style="padding-top:0" aria-labelledby="int-title">
@@ -508,7 +518,8 @@ function admin() {
       ${f("pr-ig", "Instagram bağlantısı", '<input id="pr-ig" name="instagram" type="url" placeholder="https://www.instagram.com/…">')}
       ${f("pr-li", "LinkedIn bağlantısı", '<input id="pr-li" name="linkedin" type="url" placeholder="https://www.linkedin.com/in/…">')}
 
-      <div class="full adm-skills-head"><h2 class="h-sub adm-sub">Yetenekler</h2><button class="adm-btn" type="button" data-add-skill>+ Yetenek ekle</button></div>
+      <div class="full adm-skills-head"><h2 class="h-sub adm-sub">Yetkinlik alanları</h2><button class="adm-btn" type="button" data-add-skill>+ Alan ekle</button></div>
+      <p class="adm-hint full">Her alan Hakkımda sayfasında bir kart olur. Öğeleri virgülle ayırın; seviye ya da yüzde gösterilmez.</p>
       <div class="full adm-skills" data-skills></div>
       ${formFoot("Profili uygula")}
     </form>

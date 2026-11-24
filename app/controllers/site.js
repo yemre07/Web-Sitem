@@ -207,9 +207,6 @@
   document.documentElement.addEventListener("mouseleave", function () { pointer.on = false; });
 
   /* 1. Interactive constellation network (background canvas) */
-  /* CONTROLLER · site
-   UI behaviour for every public page: menu, filters, blog routing, lightbox,
-   contact form → inbox, and the visual layer (canvas, cursor, tilt, reveal). */
 (function () {
     var c = document.getElementById("net");
     if (!c || !c.getContext) return;
@@ -281,10 +278,7 @@
     };
     var loop = function () { draw(); requestAnimationFrame(loop); };
     var t;
-    window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout/* CONTROLLER · site
-   UI behaviour for every public page: menu, filters, blog routing, lightbox,
-   contact form → inbox, and the visual layer (canvas, cursor, tilt, reveal). */
-(function () { size(); if (reduce) draw(); }, 120); });
+    window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(function () { size(); if (reduce) draw(); }, 120); });
     size();
     if (reduce) draw(); else requestAnimationFrame(loop);
   })();
@@ -325,10 +319,7 @@
       el.addEventListener("pointermove", function (e) {
         last = e;
         if (raf) return;
-        raf = requestAnimationFrame/* CONTROLLER · site
-   UI behaviour for every public page: menu, filters, blog routing, lightbox,
-   contact form → inbox, and the visual layer (canvas, cursor, tilt, reveal). */
-(function () {
+        raf = requestAnimationFrame(function () {
           raf = 0;
           var r = el.getBoundingClientRect();
           var px = (last.clientX - r.left) / r.width, py = (last.clientY - r.top) / r.height;
@@ -350,8 +341,8 @@
 
   /* 4. Scroll reveal (staggered) */
   var revealSel = [
-    ".hero-copy > *", ".hero-visual", ".marquee-duo", ".bento-home > *", ".pr-more", ".sec-head", ".strip > .photo",
-    ".plate-head .ph-copy > *", ".ph-orbit", ".about-intro > *", ".about-intro .prose > *", ".two > *", ".skills li", ".ruled > li",
+    ".hero-copy > *", ".hero-visual", ".marquee-duo", ".sc-head > *", ".home-about .pr-about", ".sec-head", ".strip > .photo",
+    ".plate-head .ph-copy > *", ".ph-orbit", ".about-intro > *", ".about-intro .prose > *", ".two > *", ".comp-grid > .comp", ".comp-tags > li", ".ruled > li",
     ".bento > .unit", ".gallery > .photo", ".post-card", ".post-head", ".post .article", ".contact-grid > *", ".c-list > li",
     ".form .field", ".form-foot", ".map", ".foot-mark", ".foot-inner > *"
   ].join(",");
@@ -395,7 +386,69 @@
     counters.forEach(function (el) { cio.observe(el); });
   }
 
-  /* 6. Navbar state + scroll progress */
+  /* 6. Home showcase: on wide screens the vertical scroll drives the project
+        track sideways (the section is made tall and its inner frame sticks).
+        Elsewhere it stays a native swipe/scroll-snap row. Each panel gets --p,
+        its closeness to the centre (0..1), which CSS turns into focus. */
+  (function () {
+    var sec = document.querySelector(".showcase");
+    if (!sec) return;
+    var vp = sec.querySelector(".sc-viewport"), track = sec.querySelector(".sc-track"), bar = sec.querySelector(".sc-bar i");
+    if (!vp || !track) return;
+    var panels = Array.prototype.slice.call(track.children);
+    var wide = window.matchMedia("(min-width: 900px)");
+    var pinned = false, dist = 0, ticking = false;
+    var update = function () {
+      ticking = false;
+      var p;
+      if (pinned) {
+        p = dist ? Math.min(1, Math.max(0, -sec.getBoundingClientRect().top / dist)) : 0;
+        track.style.transform = "translate3d(" + (-p * dist).toFixed(1) + "px,0,0)";
+      } else {
+        var max = vp.scrollWidth - vp.clientWidth;
+        p = max > 0 ? vp.scrollLeft / max : 0;
+      }
+      if (bar) bar.style.transform = "scaleX(" + p.toFixed(4) + ")";
+      if (reduce) return;
+      var w = window.innerWidth, cx = w / 2;
+      panels.forEach(function (el) {
+        var b = el.getBoundingClientRect();
+        var d = Math.abs(b.left + b.width / 2 - cx) / (w * .62);
+        el.style.setProperty("--p", Math.max(0, 1 - d).toFixed(3));
+      });
+    };
+    var request = function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    var measure = function () {
+      pinned = wide.matches && !reduce;
+      sec.classList.toggle("is-pinned", pinned);
+      if (pinned) {
+        track.style.transform = "";
+        dist = Math.max(0, track.scrollWidth - window.innerWidth);
+        sec.style.height = (sec.querySelector(".sc-pin").offsetHeight + dist) + "px";
+      } else {
+        sec.style.height = "";
+        track.style.transform = "";
+      }
+      update();
+    };
+    window.addEventListener("scroll", request, { passive: true });
+    vp.addEventListener("scroll", request, { passive: true });
+    var rt;
+    window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(measure, 120); });
+    if (wide.addEventListener) wide.addEventListener("change", measure);
+    window.addEventListener("load", measure);
+    /* keyboard: tabbing into a panel scrolls the page to where that panel is centred */
+    track.addEventListener("focusin", function (e) {
+      if (!pinned) return;
+      var el = e.target.closest(".sc-panel");
+      if (!el) return;
+      var i = panels.indexOf(el), top = sec.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo(0, top + dist * (i / Math.max(1, panels.length - 1)));
+    });
+    measure();
+  })();
+
+  /* 7. Navbar state + scroll progress */
   var navbar = document.querySelector(".navbar");
   var prog = document.querySelector(".progress");
   var ticking = false;

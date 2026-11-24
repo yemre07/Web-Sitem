@@ -629,30 +629,32 @@ globalThis.SITE_DEFAULTS = {
         ]
       }
     ],
-    "skills": [
+    "competencies": [
       {
-        "name": "Python",
-        "value": 86,
-        "tr": "Yapay zekâ ve veri bilimi projelerinin temelinde ilerliyorum.",
-        "en": "Building the foundations for AI and data science projects."
+        "unit": "star",
+        "tr": {
+          "title": "Yazılım",
+          "text": "Algoritma kurmaktan çalışan bir arayüze kadar: problemi parçalara ayırıp kodla çözmek.",
+          "items": ["Python", "Algoritmalar", "Yapay zekâ temelleri", "Veri analizi", "HTML · CSS", "JavaScript", "Responsive tasarım"]
+        },
+        "en": {
+          "title": "Software",
+          "text": "From building an algorithm to a working interface: breaking a problem down and solving it in code.",
+          "items": ["Python", "Algorithms", "AI fundamentals", "Data analysis", "HTML · CSS", "JavaScript", "Responsive design"]
+        }
       },
       {
-        "name": "Photoshop",
-        "value": 80,
-        "tr": "Görsel düzenleme ve dijital illüstrasyon.",
-        "en": "Photo editing and digital illustration."
-      },
-      {
-        "name": "HTML · CSS",
-        "value": 73,
-        "tr": "Web sitelerinin yapısı ve tasarım estetiği.",
-        "en": "Structure and visual design of websites."
-      },
-      {
-        "name": "JavaScript",
-        "value": 25,
-        "tr": "Web sayfalarına etkileşim kazandırmayı öğreniyorum.",
-        "en": "Learning to make web pages interactive."
+        "unit": "knot",
+        "tr": {
+          "title": "Görsel tasarım",
+          "text": "Işık, renk ve kompozisyonla bir görselin hikâyesini kurmak.",
+          "items": ["Adobe Photoshop", "Karakalem renklendirme", "Smart Object kompozisyon", "Siyah-beyaz kontrast", "Ürün tanıtım posteri", "Arayüz tasarımı"]
+        },
+        "en": {
+          "title": "Visual design",
+          "text": "Building the story of an image with light, colour and composition.",
+          "items": ["Adobe Photoshop", "Charcoal colorization", "Smart Object compositing", "Black & white contrast", "Product posters", "Interface design"]
+        }
       }
     ],
     "interests": [

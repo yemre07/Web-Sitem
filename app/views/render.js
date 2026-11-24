@@ -8,11 +8,11 @@
 
   /* ---------- primitives ---------- */
   var U = {
-    diamond: '<path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/>',
-    eye: '<path fill-rule="evenodd" d="M16 3 29 16 16 29 3 16Zm0 5-8 8 8 8 8-8Z"/><path d="M1 14h4v4H1zM27 14h4v4h-4zM14 1h4v4h-4zM14 27h4v4h-4z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/>',
-    star: '<path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/>',
+    diamond: '<path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a m" d="M16 12 18 14 20 16 18 18 16 20 14 18 12 16 14 14Z"/>',
+    eye: '<path fill-rule="evenodd" d="M16 3 29 16 16 29 3 16Zm0 5-8 8 8 8 8-8Z"/><path d="M1 14h4v4H1zM27 14h4v4h-4zM14 1h4v4h-4zM14 27h4v4h-4z"/><path class="a m" d="M16 12 18 14 20 16 18 18 16 20 14 18 12 16 14 14Z"/>',
+    star: '<path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a m" d="M16 12 18 14 20 16 18 18 16 20 14 18 12 16 14 14Z"/>',
     knot: '<path fill-rule="evenodd" d="M3 3h17v17H3Zm4 4v9h9V7Z"/><path fill-rule="evenodd" d="M12 12h17v17H12Zm4 4v9h9v-9Z"/><path class="a" d="M12 12h4v4h-4z"/>',
-    hook: '<path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/>',
+    hook: '<path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a m" d="M16 12 18 14 20 16 18 18 16 20 14 18 12 16 14 14Z"/>',
     cross: '<path d="M14 2h4v4h-4zM9 7h4v4H9zM19 7h4v4h-4zM4 12h4v4H4zM24 12h4v4h-4zM9 17h4v4H9zM19 17h4v4h-4zM14 22h4v4h-4zM4 16h4v4H4zM24 16h4v4h-4z"/><path class="a" d="M14 12h4v8h-4z"/>'
   };
   var u = function (n, cls) {
@@ -140,23 +140,38 @@
 
   /* ---------- section renderers (key = data-cms attribute) ---------- */
   var R = {
+    /* Plain counts under the hero intro (no self-assessed percentages) */
     heroStats: function (L, d) {
-      var py = (d.about.skills || []).filter(function (s) { return /python/i.test(s.name); })[0];
       var stats = [
-        [d.projects.length, T(L, "Proje", "Projects")],
-        [d.gallery.length, T(L, "Fotoğraf", "Photos")],
-        [d.blog.length, T(L, "Blog yazısı", "Articles")],
-        [py ? py.value : 0, "Python", "%"]
+        [d.projects.length, T(L, "proje", "projects")],
+        [d.gallery.length, T(L, "fotoğraf", "photos")],
+        [d.blog.length, T(L, "yazı", "articles")]
       ];
-      return stats.map(function (s) { return '<li><b><span data-count="' + (+s[0]) + '">' + (+s[0]) + "</span>" + (s[2] || "") + "</b><span>" + s[1] + "</span></li>"; }).join("");
+      return stats.map(function (s) { return '<li><b data-count="' + (+s[0]) + '">' + (+s[0]) + "</b> " + s[1] + "</li>"; }).join("");
     },
+    /* Home: the short "about me" panel */
     homeBento: function (L, d) {
-      var about = '<div class="pr-about glass tilt">\n    ' + bigIcon("person") +
-        '\n    <h2 id="pr-title"><span class="pn">01</span>' + T(L, "Kısaca ben", "Me, in short") + "</h2>" +
-        '\n    <ul class="facts">\n' + d.about.facts.map(function (f) { var x = f[L] || f.tr; return "      <li><span>" + esc(x[0]) + "</span>" + esc(x[1]) + "</li>"; }).join("\n") + "\n    </ul>" +
+      return '\n  <div class="pr-about glass tilt soft">\n    ' + bigIcon("person") +
+        '\n    <div class="pa-head"><h2 id="pr-title">' + T(L, "Kısaca ben", "Me, in short") + "</h2>" +
         "\n    <p>" + esc(d.about.summary[L] || d.about.summary.tr) + "</p>" +
-        '\n    <a class="link" href="' + esc(resolve(PAGE.about[L])) + '">' + T(L, "Hakkımda", "About me") + " " + u("diamond") + "</a>\n  </div>";
-      return "\n  " + about + "\n  " + featuredList(d).map(function (x, k) { return plateUnit(L, x.p, x.i, k + 2); }).join("") + "\n";
+        '\n    <a class="link" href="' + esc(resolve(PAGE.about[L])) + '">' + T(L, "Hakkımda", "About me") + " " + u("diamond") + "</a></div>" +
+        '\n    <ul class="facts">\n' + d.about.facts.map(function (f) { var x = f[L] || f.tr; return "      <li><span>" + esc(x[0]) + "</span>" + esc(x[1]) + "</li>"; }).join("\n") + "\n    </ul>\n  </div>\n";
+    },
+    /* Home: horizontally scrolling project showcase (featured first, then the rest) */
+    showcase: function (L, d) {
+      var order = featuredList(d);
+      d.projects.forEach(function (p, i) { if (!order.some(function (x) { return x.i === i; })) order.push({ p: p, i: i }); });
+      var total = num(order.length);
+      return order.map(function (x, k) {
+        var p = x.p, cat = p.cat === "code" ? "code" : "design";
+        var link = esc(resolve(PAGE.projects[L])) + "#" + esc(p.id);
+        return '\n  <article class="sc-panel" data-cat="' + cat + '">' +
+          '\n    <a class="sc-media" href="' + link + '" tabindex="-1" aria-hidden="true"><img src="' + safeUrl(p.img) + '" alt=""' + dims(p, 800, 600) + ' loading="lazy"></a>' +
+          '\n    <div class="sc-copy"><p class="sc-meta"><span class="sc-no">' + num(k + 1) + " / " + total + "</span><span>" + typeLabel(L, cat) + "</span></p>" +
+          '\n    <h3><a href="' + link + '">' + esc(loc(p, L, "title")) + "</a></h3>" +
+          "\n    <p>" + esc(loc(p, L, "desc")) + "</p>" +
+          (p.tools ? '\n    <p class="sc-tools">' + esc(p.tools) + "</p>" : "") + "</div>\n  </article>";
+      }).join("") + "\n";
     },
     featuredNote: function (L, d) {
       var f = featuredList(d).length, n = d.projects.length;
@@ -220,11 +235,16 @@
         return '          <tr><th scope="row">' + esc(x[0]) + "</th><td>" + val + "</td></tr>";
       }).join("\n") + "\n        ";
     },
-    skills: function (L, d) {
-      return "\n    " + d.about.skills.map(function (s) {
-        var v = Math.max(0, Math.min(100, +s.value || 0));
-        return '<li><span class="name">' + esc(s.name) + "<small>" + esc(s[L] || s.tr) + '</small></span><span class="meter" aria-hidden="true" style="--v:' + v + '%"><i></i><b></b></span><span class="val">' + v + '<span class="sr-only"> / 100</span></span></li>';
-      }).join("\n    ") + "\n  ";
+    /* About: competency areas, listed without levels */
+    competencies: function (L, d) {
+      return "\n  " + (d.about.competencies || []).map(function (c) {
+        var x = c[L] || c.tr;
+        var items = (x.items && x.items.length ? x.items : (c.tr.items || []));
+        return '<article class="comp glass tilt soft"><span class="glare" aria-hidden="true"></span>' +
+          '<header class="comp-head">' + u(c.unit || "diamond", "u comp-ic") + "<h3>" + esc(x.title) + "</h3></header>" +
+          (x.text ? "<p>" + esc(x.text) + "</p>" : "") +
+          '<ul class="comp-tags">' + items.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul></article>";
+      }).join("\n  ") + "\n";
     },
     interests: function (L, d) {
       return "\n    " + d.about.interests.map(function (it, i) {

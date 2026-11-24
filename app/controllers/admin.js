@@ -81,7 +81,7 @@
     var ids = {};
     data.projects.concat(data.gallery, data.blog).forEach(function (x) { ids[x.id] = 1; });
     var id = base, n = 2;
-    while (ids[id] || /^(main|lightbox|contact-form|yetenekler|pr-title|gal-title|hero-title)$/.test(id)) id = base + "-" + n++;
+    while (ids[id] || /^(main|lightbox|contact-form|yetenekler|pr-title|sc-title|gal-title|hero-title)$/.test(id)) id = base + "-" + n++;
     return id;
   };
   var tags = function (s) {
@@ -589,15 +589,25 @@
   var pForm = formOf("profile");
   var skillsBox = $("[data-skills]");
   var skillSeq = 0;
-  var skillRow = function (s) {
-    s = s || { name: "", value: 50, tr: "", en: "" };
+  /* Competency areas (About page): title, one-line text and a comma list per language, no levels */
+  var unitChoices = ["star", "knot", "diamond", "eye", "hook", "cross"];
+  var skillRow = function (c) {
+    c = c || { unit: "diamond", tr: { title: "", text: "", items: [] }, en: { title: "", text: "", items: [] } };
+    var tr = c.tr || {}, en = c.en || {};
     var id = "sk" + (skillSeq++) + "-";
-    return '<div class="adm-skill" data-skill>' +
-      '<div class="field"><label for="' + id + 'n">Yetenek adı *</label><input id="' + id + 'n" name="skName" type="text" required value="' + esc(s.name) + '"></div>' +
-      '<div class="field adm-skill-v"><label for="' + id + 'v">Seviye % *</label><input id="' + id + 'v" name="skValue" type="number" min="0" max="100" step="1" required value="' + esc(s.value) + '"></div>' +
-      '<div class="field"><label for="' + id + 't">Açıklama (TR)</label><input id="' + id + 't" name="skTr" type="text" value="' + esc(s.tr) + '"></div>' +
-      '<div class="field"><label for="' + id + 'e">Açıklama (EN)</label><input id="' + id + 'e" name="skEn" type="text" value="' + esc(s.en) + '"></div>' +
-      '<button type="button" class="adm-icon del" data-del-skill title="Yeteneği sil">✕<span class="sr-only"> Yeteneği sil</span></button>' +
+    var fld = function (key, label, val, req) {
+      return '<div class="field"><label for="' + id + key + '">' + label + (req ? " *" : "") + '</label><input id="' + id + key + '" name="' + key + '" type="text"' + (req ? " required" : "") + ' value="' + esc(val || "") + '"></div>';
+    };
+    return '<div class="adm-skill adm-comp" data-skill>' +
+      fld("cTitleTr", "Alan adı (TR)", tr.title, true) +
+      fld("cTitleEn", "Alan adı (EN)", en.title) +
+      fld("cTextTr", "Kısa açıklama (TR)", tr.text) +
+      fld("cTextEn", "Kısa açıklama (EN)", en.text) +
+      fld("cItemsTr", "Öğeler (TR, virgülle)", (tr.items || []).join(", "), true) +
+      fld("cItemsEn", "Öğeler (EN, virgülle)", (en.items || []).join(", ")) +
+      '<div class="field"><label for="' + id + 'u">İkon</label><select id="' + id + 'u" name="cUnit">' +
+        unitChoices.map(function (k) { return '<option value="' + k + '"' + (k === c.unit ? " selected" : "") + ">" + k + "</option>"; }).join("") + "</select></div>" +
+      '<button type="button" class="adm-icon del" data-del-skill title="Alanı sil">✕<span class="sr-only"> Alanı sil</span></button>' +
       "</div>";
   };
   var fillProfile = function () {
@@ -610,7 +620,7 @@
     setVal(pForm, "mapQuery", p.mapQuery); setVal(pForm, "email", p.email);
     setVal(pForm, "phone1", (p.phones || [])[0]); setVal(pForm, "phone2", (p.phones || [])[1]);
     setVal(pForm, "instagram", p.instagram); setVal(pForm, "linkedin", p.linkedin);
-    skillsBox.innerHTML = (a.skills || []).map(function (s) { return skillRow(s); }).join("");
+    skillsBox.innerHTML = (a.competencies || []).map(function (c) { return skillRow(c); }).join("");
     $$(".field.invalid", pForm).forEach(function (f) { f.classList.remove("invalid"); });
     var st = $(".form-foot .status", pForm);
     if (st) st.textContent = "";
@@ -633,10 +643,17 @@
       var bioTr = paras(val(pForm, "bioTr")), bioEn = paras(val(pForm, "bioEn"));
       data.about.summary = { tr: val(pForm, "summaryTr"), en: val(pForm, "summaryEn") || val(pForm, "summaryTr") };
       data.about.bio = { tr: bioTr, en: bioEn.length ? bioEn : bioTr };
-      data.about.skills = $$("[data-skill]", skillsBox).map(function (row) {
-        var g = function (n) { return String(row.querySelector('[name="' + n + '"]').value || "").trim(); };
-        return { name: g("skName"), value: Math.max(0, Math.min(100, Math.round(+g("skValue") || 0))), tr: g("skTr"), en: g("skEn") || g("skTr") };
+      var list = function (v) { return String(v || "").split(",").map(function (x) { return x.trim(); }).filter(Boolean); };
+      data.about.competencies = $$("[data-skill]", skillsBox).map(function (row) {
+        var g = function (n) { var el = row.querySelector('[name="' + n + '"]'); return String(el ? el.value : "").trim(); };
+        var itemsTr = list(g("cItemsTr")), itemsEn = list(g("cItemsEn"));
+        return {
+          unit: g("cUnit") || "diamond",
+          tr: { title: g("cTitleTr"), text: g("cTextTr"), items: itemsTr },
+          en: { title: g("cTitleEn") || g("cTitleTr"), text: g("cTextEn") || g("cTextTr"), items: itemsEn.length ? itemsEn : itemsTr }
+        };
       });
+      if (data.about.skills) data.about.skills = undefined;
       data.profile = {
         location: { tr: val(pForm, "locTr"), en: val(pForm, "locEn") || val(pForm, "locTr") },
         email: val(pForm, "email"),

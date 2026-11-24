@@ -27,7 +27,7 @@
   var complete = function (d) {
     var out = clone(d);
     out.about = out.about || clone(DEFAULTS.about);
-    ["facts", "summary", "bio", "education", "personal", "skills", "interests"].forEach(function (k) {
+    ["facts", "summary", "bio", "education", "personal", "competencies", "interests"].forEach(function (k) {
       if (!out.about[k]) out.about[k] = clone(DEFAULTS.about[k]);
     });
     out.profile = isObj(out.profile) ? out.profile : clone(DEFAULTS.profile || {});
