@@ -1,0 +1,217 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Gallery</title>
+  <meta name="description" content="My Personal Gallery Page">
+
+
+
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <style>
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .gallery-item img {
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      background: rgba(62, 95, 138, 0.9);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      transition: bottom 0.4s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+
+    .gallery-item:hover .gallery-overlay {
+      bottom: 0;
+    }
+
+    .gallery-overlay h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #fff;
+    }
+
+    .gallery-overlay p {
+      font-size: 0.9rem;
+      margin: 0;
+      color: #e0e0e0;
+    }
+  </style>
+
+</head>
+
+<body class="gallery-page">
+
+  <header id="header" class="header d-flex align-items-center light-background sticky-top">
+    <div class="container position-relative d-flex align-items-center justify-content-between">
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="gallery.html" class="active">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div class="header-social-links d-flex align-items-center">
+        <a href="https://www.instagram.com/e.mre0_0/" target="_blank" class="me-2"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/yunus-emre-ersoy-2a3b2638a/" target="_blank"><i class="bi bi-linkedin"></i></a>
+
+        <a href="galeri.html" class="lang-switch ms-3" style="font-size: 0.85rem; font-weight: bold; border: 1px solid #3e5f8a; padding: 4px 8px; border-radius: 4px; color: #3e5f8a; text-decoration: none;">TR</a>
+      </div>
+  </header>
+
+  <main class="main">
+
+    <section id="gallery" class="section">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Photo Gallery</h2>
+        <p>Snapshots reflecting me from every aspect of my life.</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row g-4">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/img/person/atakanım.jpg" alt="Nephew" class="img-fluid">
+              <div class="gallery-overlay">
+                <h4>My Nephew</h4>
+                <p>15 months ago, I was given the duty of being an uncle.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/img/person/mezuniyet.jpg" alt="Graduation" class="img-fluid">
+              <div class="gallery-overlay">
+                <h4>Graduation</h4>
+                <p>We got the diploma, now contemplating the path ahead.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/img/person/kahve.jpg" alt="Socializing" class="img-fluid">
+              <div class="gallery-overlay">
+                <h4>Socializing</h4>
+                <p>A warm coffee, a serene smile.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/img/person/kask (1).jpg" alt="Motorcycle" class="img-fluid">
+              <div class="gallery-overlay">
+                <h4>Motorcycle</h4>
+                <p>Not four walls, but asphalt.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/img/person/otopark.jpg" alt="Modeling" class="img-fluid">
+              <div class="gallery-overlay">
+                <h4>Modeling</h4>
+                <p>A colorful stance against the grey ground; confidence and style captured as the frame closes.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="gallery-item">
+              <img src="assets/img/person/okultakımı.jpg" alt="Football" class="img-fluid">
+              <div class="gallery-overlay">
+                <h4>Football</h4>
+                <p>Jerseys, united destiny; a team spirit memory that won't be forgotten even years later.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Yunus Emre </strong> <span>All Rights Reserved.<br></span></p>
+      </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href="https://www.instagram.com/e.mre0_0/" target="_blank"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/yunus-emre-ersoy-2a3b2638a/" target="_blank"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <div id="preloader"></div>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

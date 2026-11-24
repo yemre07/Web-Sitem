@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog · Yunus Emre Ersoy</title>
+<meta name="description" content="Vibe coding, Photoshop'ta renk teorisi ve responsive tasarım ilkeleri üzerine yazılar.">
+<meta name="author" content="Yunus Emre Ersoy">
+<meta name="theme-color" content="#07080d">
+<link rel="alternate" hreflang="tr" href="blog-tr.html">
+<link rel="alternate" hreflang="en" href="blog.html">
+<link rel="preload" href="assets/fonts/tektur-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2310131c' d='M16 1 31 16 16 31 1 16Z'/%3E%3Cpath fill='%23ff6b6b' d='M16 9l7 7-7 7-7-7Z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body data-page="blog">
+<a class="skip" href="#main">İçeriğe geç</a>
+<div class="fx-layer" aria-hidden="true">
+  <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span>
+  <canvas id="net"></canvas>
+  <span class="grid-tex"></span><span class="grain"></span>
+</div>
+<div class="cursor-glow" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
+<header class="navbar">
+  <a class="brand" href="anasayfa.html"><svg class="mono-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ye-mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6b6b"/><stop offset=".55" stop-color="#ffb86b"/><stop offset="1" stop-color="#9d8cff"/></linearGradient></defs><path fill="url(#ye-mg)" fill-rule="evenodd" d="M32 1 63 32 32 63 1 32Zm0 6L7 32l25 25 25-25Z"/><path fill="#10131c" stroke="url(#ye-mg)" stroke-width="1.5" d="M32 12 52 32 32 52 12 32Z"/><text x="32" y="37.5" text-anchor="middle" font-family="Tektur, sans-serif" font-weight="800" font-size="14" fill="#f4f1ff" letter-spacing=".5">YE</text></svg><span class="brand-name">Yunus Emre<small> Ersoy</small></span></a>
+  <nav class="nav main-nav" aria-label="Ana menü"><ol><li><a href="anasayfa.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Anasayfa</span><span class="num">01</span></a></li><li><a href="hakkimda.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 3 29 16 16 29 3 16Zm0 5-8 8 8 8 8-8Z"/><path d="M1 14h4v4H1zM27 14h4v4h-4zM14 1h4v4h-4zM14 27h4v4h-4z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg><span>Hakkımda</span><span class="num">02</span></a></li><li><a href="projeler.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Projeler</span><span class="num">03</span></a></li><li><a href="galeri.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M3 3h17v17H3Zm4 4v9h9V7Z"/><path fill-rule="evenodd" d="M12 12h17v17H12Zm4 4v9h9v-9Z"/><path class="a" d="M12 12h4v4h-4z"/></svg><span>Galeri</span><span class="num">04</span></a></li><li><a href="blog-tr.html" aria-current="page"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg><span>Blog</span><span class="num">05</span></a></li><li><a href="iletisim.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M14 2h4v4h-4zM9 7h4v4H9zM19 7h4v4h-4zM4 12h4v4H4zM24 12h4v4h-4zM9 17h4v4H9zM19 17h4v4h-4zM14 22h4v4h-4zM4 16h4v4H4zM24 16h4v4h-4z"/><path class="a" d="M14 12h4v8h-4z"/></svg><span>İletişim</span><span class="num">06</span></a></li></ol></nav>
+  <div class="nav-tools">
+    <div class="lang" role="group" aria-label="Dil seçimi"><span aria-current="true">TR</span><a href="blog.html" hreflang="en" lang="en" data-lang-switch title="English">EN</a></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0 16 8 8 16 0 8Zm0 4L4 8l4 4 4-4Z" fill="currentColor" fill-rule="evenodd"/></svg>Menü</button>
+  </div>
+</header>
+<nav class="nav mobile-nav" id="mobile-nav" hidden aria-label="Mobil menü"><ol><li><a href="anasayfa.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Anasayfa</span><span class="num">01</span></a></li><li><a href="hakkimda.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 3 29 16 16 29 3 16Zm0 5-8 8 8 8 8-8Z"/><path d="M1 14h4v4H1zM27 14h4v4h-4zM14 1h4v4h-4zM14 27h4v4h-4z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg><span>Hakkımda</span><span class="num">02</span></a></li><li><a href="projeler.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Projeler</span><span class="num">03</span></a></li><li><a href="galeri.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M3 3h17v17H3Zm4 4v9h9V7Z"/><path fill-rule="evenodd" d="M12 12h17v17H12Zm4 4v9h9v-9Z"/><path class="a" d="M12 12h4v4h-4z"/></svg><span>Galeri</span><span class="num">04</span></a></li><li><a href="blog-tr.html" aria-current="page"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg><span>Blog</span><span class="num">05</span></a></li><li><a href="iletisim.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M14 2h4v4h-4zM9 7h4v4H9zM19 7h4v4h-4zM4 12h4v4H4zM24 12h4v4h-4zM9 17h4v4H9zM19 17h4v4h-4zM14 22h4v4h-4zM4 16h4v4H4zM24 16h4v4h-4z"/><path class="a" d="M14 12h4v8h-4z"/></svg><span>İletişim</span><span class="num">06</span></a></li></ol></nav>
+<main id="main">
+<div class="blog">
+<div class="post-list">
+<header class="wrap plate-head">
+  <div class="ph-copy"><p class="kicker"><span class="dot"></span>Levha 05 / 06</p><h1><span class="grad-text">Blog</span></h1><p class="lead">Yazılım, tasarım ve web üzerine notlarım. Bir kategoriye ya da etikete tıklayarak yazıları filtreleyebilirsiniz.</p></div>
+  <div class="ph-orbit" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><i class="sat s1"></i><i class="sat s2"></i><i class="sat s3"></i><svg class="u unit-big" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg></div>
+</header>
+<div class="beam" aria-hidden="true"></div>
+<section class="wrap sec" aria-label="Yazılar">
+  <div class="post-index"><article class="post-card glass tilt soft" data-keys="Yazılım Geliştirme|#YapayZeka|#VibeCoding|#Python|#Verimlilik">
+    <div class="meta"><time class="date" datetime="2026-11-14">14 Kasım 2026</time><span class="date">6 dk okuma</span></div>
+    <div>
+      <button type="button" class="cat" data-key="Yazılım Geliştirme" aria-pressed="false" style="border:0;cursor:pointer"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Yazılım Geliştirme</button>
+      <h2><a href="#vibe-coding">Yapay Zekâ Destekli Yazılım Geliştirme: Vibe Coding Nedir?</a></h2>
+      <p>Kodu satır satır yazmak yerine ne istediğinizi anlatıp yapay zekâya yazdırmak: hızlı mı, riskli mi? Bir öğrenci gözüyle vibe coding'in artıları, tuzakları ve sağlıklı kullanım listesi.</p>
+      <ul class="tags" aria-label="Etiketler"><li><button type="button" class="tag" data-key="#YapayZeka" aria-pressed="false">#YapayZeka</button></li><li><button type="button" class="tag" data-key="#VibeCoding" aria-pressed="false">#VibeCoding</button></li><li><button type="button" class="tag" data-key="#Python" aria-pressed="false">#Python</button></li><li><button type="button" class="tag" data-key="#Verimlilik" aria-pressed="false">#Verimlilik</button></li></ul>
+      <p style="margin:18px 0 0"><a class="link" href="#vibe-coding">Yazıyı oku <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></p>
+    </div>
+    <span class="glare" aria-hidden="true"></span><svg class="u u-big" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg>
+  </article>
+<article class="post-card glass tilt soft" data-keys="Dijital Tasarım|#Photoshop|#RenkTeorisi|#GrafikTasarım|#Afiş">
+    <div class="meta"><time class="date" datetime="2026-10-29">29 Ekim 2026</time><span class="date">7 dk okuma</span></div>
+    <div>
+      <button type="button" class="cat" data-key="Dijital Tasarım" aria-pressed="false" style="border:0;cursor:pointer"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Dijital Tasarım</button>
+      <h2><a href="#renk-teorisi">Adobe Photoshop ve Dijital Tasarımda Renk Teorisi</a></h2>
+      <p>Renk çemberi, uyum şemaları, 60-30-10 kuralı ve Photoshop'ta rengi kontrol etmenin pratik yolları; renklendirme ve afiş projelerimden örneklerle.</p>
+      <ul class="tags" aria-label="Etiketler"><li><button type="button" class="tag" data-key="#Photoshop" aria-pressed="false">#Photoshop</button></li><li><button type="button" class="tag" data-key="#RenkTeorisi" aria-pressed="false">#RenkTeorisi</button></li><li><button type="button" class="tag" data-key="#GrafikTasarım" aria-pressed="false">#GrafikTasarım</button></li><li><button type="button" class="tag" data-key="#Afiş" aria-pressed="false">#Afiş</button></li></ul>
+      <p style="margin:18px 0 0"><a class="link" href="#renk-teorisi">Yazıyı oku <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></p>
+    </div>
+    <span class="glare" aria-hidden="true"></span><svg class="u u-big" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M3 3h17v17H3Zm4 4v9h9V7Z"/><path fill-rule="evenodd" d="M12 12h17v17H12Zm4 4v9h9v-9Z"/><path class="a" d="M12 12h4v4h-4z"/></svg>
+  </article>
+<article class="post-card glass tilt soft" data-keys="Web Geliştirme|#Responsive|#CSS|#MobilÖncelikli|#Erişilebilirlik">
+    <div class="meta"><time class="date" datetime="2026-10-08">8 Ekim 2026</time><span class="date">8 dk okuma</span></div>
+    <div>
+      <button type="button" class="cat" data-key="Web Geliştirme" aria-pressed="false" style="border:0;cursor:pointer"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Web Geliştirme</button>
+      <h2><a href="#responsive-tasarim">Modern Web Geliştirmede Responsive Tasarım İlkeleri</a></h2>
+      <p>Viewport etiketinden clamp() ile akışkan yazıya, CSS Grid'den duyarlı görsellere: bir sitenin telefonda, tablette ve masaüstünde düzgün görünmesi için gereken temel ilkeler.</p>
+      <ul class="tags" aria-label="Etiketler"><li><button type="button" class="tag" data-key="#Responsive" aria-pressed="false">#Responsive</button></li><li><button type="button" class="tag" data-key="#CSS" aria-pressed="false">#CSS</button></li><li><button type="button" class="tag" data-key="#MobilÖncelikli" aria-pressed="false">#MobilÖncelikli</button></li><li><button type="button" class="tag" data-key="#Erişilebilirlik" aria-pressed="false">#Erişilebilirlik</button></li></ul>
+      <p style="margin:18px 0 0"><a class="link" href="#responsive-tasarim">Yazıyı oku <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></p>
+    </div>
+    <span class="glare" aria-hidden="true"></span><svg class="u u-big" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg>
+  </article></div>
+  <p class="filter-note" aria-live="polite"></p>
+</section>
+</div>
+<article class="post wrap" id="vibe-coding" aria-labelledby="vibe-coding-t">
+  <a class="link back" href="#">Tüm yazılar <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a>
+  <header class="post-head">
+    <div class="row"><span class="cat"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Yazılım Geliştirme</span><time class="date label" datetime="2026-11-14">14 Kasım 2026</time><span class="label">6 dk okuma</span><span class="label">Yazar: Yunus Emre Ersoy</span></div>
+    <h1 id="vibe-coding-t">Yapay Zekâ Destekli Yazılım Geliştirme: Vibe Coding Nedir?</h1>
+    <div class="row"><span class="label">Etiketler</span><ul class="tags"><li><button type="button" class="tag" data-key="#YapayZeka">#YapayZeka</button></li><li><button type="button" class="tag" data-key="#VibeCoding">#VibeCoding</button></li><li><button type="button" class="tag" data-key="#Python">#Python</button></li><li><button type="button" class="tag" data-key="#Verimlilik">#Verimlilik</button></li></ul></div>
+  </header>
+  <div class="article glass">
+<p>Şubat 2025'te yapay zekâ araştırmacısı Andrej Karpathy, kod yazmanın yeni bir biçimini tarif etmek için “vibe coding” ifadesini kullandı: Programcı ne istediğini doğal dille anlatıyor, kodu büyük ölçüde bir dil modeli yazıyor, insan ise sonucu çalıştırıp hissiyata göre yön veriyor. Terim kısa sürede yazılım dünyasının en çok konuşulan kavramlarından biri oldu.</p>
+<p>Bilgisayar programcılığı öğrencisi olarak bu konu beni doğrudan ilgilendiriyor. Çünkü bir yandan algoritma ve sözdizimi öğreniyoruz, öte yandan aynı işi saniyeler içinde yapabilen araçlar her gün daha iyi hâle geliyor. Peki bu araçları nasıl kullanmalıyız?</p>
+
+<h2>Vibe coding nasıl işler?</h2>
+<p>Süreç, klasik “yaz, derle, hata ayıkla” döngüsünün konuşmaya dönüşmüş hâlidir:</p>
+<ol>
+  <li><strong>İsteği tarif et:</strong> “Bir CSV dosyasındaki notların ortalamasını hesaplayan bir Python betiği yaz.”</li>
+  <li><strong>Üretilen kodu çalıştır:</strong> Model bir taslak verir, siz onu çalıştırırsınız.</li>
+  <li><strong>Geri bildirim ver:</strong> Hata mesajını ya da beklenmeyen çıktıyı modele geri yapıştırırsınız.</li>
+  <li><strong>Tekrarla:</strong> Program istediğiniz gibi çalışana kadar döngü sürer.</li>
+</ol>
+<p>Bu yaklaşımda klavyeden çok fikir ve doğrulama önemlidir. Ne istediğini net anlatabilen kişi daha iyi sonuç alır.</p>
+
+<h2>Nerede gerçekten işe yarıyor?</h2>
+<ul>
+  <li><strong>Hızlı prototipler:</strong> Bir fikrin işe yarayıp yaramadığını görmek için birkaç saatte çalışan bir taslak çıkarmak.</li>
+  <li><strong>Tekrarlayan kod:</strong> Form doğrulama, dosya okuma, basit API istekleri gibi her projede yazılan kalıplar.</li>
+  <li><strong>Öğrenme:</strong> Bilmediğiniz bir kütüphaneyi örnek kod üzerinden tanımak ve “bu satır ne yapıyor?” diye sormak.</li>
+  <li><strong>Küçük araçlar:</strong> Kendi işinizi kolaylaştıran tek seferlik betikler.</li>
+</ul>
+
+<h2>Dikkat edilmesi gereken tuzaklar</h2>
+<p>Yapay zekâ çok emin bir dille yanlış kod da yazabilir. En sık karşılaşılan sorunlar şunlar:</p>
+<ul>
+  <li><strong>Anlamadığın kodu teslim etmek:</strong> Çalışıyor diye kabul edilen ama mantığı bilinmeyen kod, ilk hatada içinden çıkılmaz hâle gelir.</li>
+  <li><strong>Güvenlik açıkları:</strong> Şifrelerin koda gömülmesi, kullanıcı girdisinin kontrol edilmemesi gibi hatalar sık görülür.</li>
+  <li><strong>Var olmayan kütüphaneler:</strong> Model bazen gerçekte olmayan bir paket ya da fonksiyon adı uydurabilir.</li>
+  <li><strong>Test eksikliği:</strong> Bir kez doğru sonuç veren kod, farklı girdilerde bozulabilir.</li>
+</ul>
+<blockquote>Yapay zekâ kodu yazabilir; ama o kodun sorumluluğu her zaman onu projeye ekleyen kişidedir.</blockquote>
+
+<h2>Bir öğrenci için sağlıklı kullanım listesi</h2>
+<ul>
+  <li>Üretilen her satırı oku; anlamadığın yeri modele açıklat.</li>
+  <li>Önce problemi kendin çözmeyi dene, sonra yapay zekânın çözümüyle karşılaştır.</li>
+  <li>Küçük adımlarla ilerle: tek seferde koca bir program yerine fonksiyon fonksiyon iste.</li>
+  <li>Her önemli fonksiyon için en az bir basit test yaz, örneğin <code>assert ortalama([2, 4]) == 3</code>.</li>
+  <li>Kişisel veriyi, şifreyi ya da API anahtarını asla sohbete yapıştırma.</li>
+  <li>Ödev ve sınav kurallarına uy; yapay zekâ kullanımına izin verilip verilmediğini öğren.</li>
+</ul>
+
+<h2>Sonuç</h2>
+<p>Vibe coding programlamayı bitirmiyor, programcının rolünü değiştiriyor. Artık iyi bir geliştirici yalnızca kod yazan değil; doğru soruyu soran, çıktıyı değerlendiren ve sistemi bütün olarak düşünen kişi. Bu yüzden temel bilgiyi öğrenmek eskisinden daha da önemli: Yapay zekânın hatasını ancak konuyu bilen biri yakalayabilir.</p></div>
+  <footer class="post-foot"><span class="label">Kategori: Yazılım Geliştirme</span><a class="link" href="#">Tüm yazılara dön <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></footer>
+</article>
+<article class="post wrap" id="renk-teorisi" aria-labelledby="renk-teorisi-t">
+  <a class="link back" href="#">Tüm yazılar <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a>
+  <header class="post-head">
+    <div class="row"><span class="cat"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Dijital Tasarım</span><time class="date label" datetime="2026-10-29">29 Ekim 2026</time><span class="label">7 dk okuma</span><span class="label">Yazar: Yunus Emre Ersoy</span></div>
+    <h1 id="renk-teorisi-t">Adobe Photoshop ve Dijital Tasarımda Renk Teorisi</h1>
+    <div class="row"><span class="label">Etiketler</span><ul class="tags"><li><button type="button" class="tag" data-key="#Photoshop">#Photoshop</button></li><li><button type="button" class="tag" data-key="#RenkTeorisi">#RenkTeorisi</button></li><li><button type="button" class="tag" data-key="#GrafikTasarım">#GrafikTasarım</button></li><li><button type="button" class="tag" data-key="#Afiş">#Afiş</button></li></ul></div>
+  </header>
+  <div class="article glass">
+<p>Bir tasarımı ilk bakışta “doğru” ya da “yanlış” hissettiren şeyin büyük kısmı renktir. Photoshop'ta yaptığım karakalem renklendirme, siyah beyaz kontrast ve ürün afişi çalışmalarında en çok zaman harcadığım konu da buydu. Bu yazıda renk teorisinin temellerini ve Photoshop'ta bunları uygulamanın pratik yollarını özetliyorum.</p>
+
+<h2>Renk çemberi ve üç temel özellik</h2>
+<p>Dijital tasarımda bir rengi üç özellikle düşünmek işi kolaylaştırır. Photoshop'un renk seçicisindeki <strong>HSB</strong> modeli de tam olarak bunu gösterir:</p>
+<ul>
+  <li><strong>Ton (Hue):</strong> Rengin kendisi; kırmızı, sarı, mavi… Çember üzerindeki açısıyla ifade edilir.</li>
+  <li><strong>Doygunluk (Saturation):</strong> Rengin ne kadar canlı ya da gri olduğu.</li>
+  <li><strong>Parlaklık (Brightness):</strong> Rengin ne kadar açık ya da koyu olduğu.</li>
+</ul>
+<p>Ekranda çalışırken renkler <strong>RGB</strong> ile, baskıya giden işlerde ise <strong>CMYK</strong> ile tanımlanır. Afişi baskıya göndermeden önce renk modunu kontrol etmek, ekranda canlı görünen bir rengin kâğıtta soluk çıkmasını önler.</p>
+
+<h2>Uyum şemaları</h2>
+<ul>
+  <li><strong>Tamamlayıcı:</strong> Çemberde karşı karşıya olan renkler (mavi ve turuncu gibi). En güçlü kontrastı verir; vurgu için idealdir.</li>
+  <li><strong>Komşu (analog):</strong> Yan yana duran renkler (sarı, turuncu, kırmızı). Sakin ve bütünlüklü bir his yaratır.</li>
+  <li><strong>Üçlü (triadik):</strong> Çemberde eşit aralıklı üç renk. Enerjik ama dengelenmesi zor.</li>
+  <li><strong>Tek renkli:</strong> Aynı tonun farklı açık-koyu değerleri. Minimal ve şık tasarımlar için güvenli seçim.</li>
+</ul>
+
+<h2>60-30-10 kuralı</h2>
+<p>Bir kompozisyonda renk ağırlığını dağıtmak için kullanılan basit bir kuraldır: Alanın yaklaşık %60'ı baskın renk, %30'u ikincil renk, %10'u vurgu rengi olur. Ürün tanıtım afişimde sarı zemin baskın renk, beyaz ürün tüpü ikincil renk, turuncu SPF etiketi ise vurgu rengiydi. Böylece göz önce ürüne, sonra slogana gidiyor.</p>
+
+<h2>Photoshop'ta rengi kontrol etmenin yolları</h2>
+<ul>
+  <li><strong>Ayarlama katmanları (Adjustment Layers):</strong> Hue/Saturation, Color Balance ve Curves ile rengi orijinal pikselleri bozmadan değiştirebilirsiniz. Beğenmezseniz katmanı silmeniz yeterli.</li>
+  <li><strong>Karışım modları:</strong> Karakalem bir çizimi renklendirirken renkleri ayrı bir katmana boyayıp katmanı <em>Color</em> ya da <em>Soft Light</em> moduna almak, çizgilerin ve gölgelerin korunmasını sağlar.</li>
+  <li><strong>Seçici renk:</strong> Görseli Black &amp; White ayarlama katmanıyla griye çevirip katman maskesinde istediğiniz alanı silerseniz, o bölge renkli kalır. Siyah beyaz kontrast projemde oyuncuyu bu yöntemle öne çıkardım.</li>
+  <li><strong>Gradient Map:</strong> Fotoğrafın açık ve koyu tonlarını seçtiğiniz renklere eşleyerek tutarlı bir atmosfer oluşturur.</li>
+  <li><strong>Örnek renk paletleri:</strong> Adobe Color gibi araçlarla bir fotoğraftan palet çıkarıp Swatches paneline kaydetmek, tüm tasarımda aynı renkleri kullanmanızı sağlar.</li>
+</ul>
+
+<h2>Renk psikolojisi ve erişilebilirlik</h2>
+<p>Renklerin çağrışımları vardır: Sarı enerji ve güneşi, mavi güveni ve sakinliği, kırmızı tutku ve aciliyeti anlatır. Ancak çağrışımdan önce okunabilirlik gelir. Metin ile arka plan arasında yeterli kontrast yoksa en güzel palet bile işe yaramaz. Web'de normal metin için en az <strong>4.5:1</strong> kontrast oranı önerilir. Ayrıca bilgiyi yalnızca renkle değil, şekil ya da yazıyla da vermek renk körlüğü olan kullanıcıları düşünmek demektir.</p>
+
+<blockquote>İyi bir palet az renkten oluşur; her rengin bir görevi vardır.</blockquote>
+
+<h2>Sonuç</h2>
+<p>Renk teorisi kural ezberlemekten çok bilinçli seçim yapmakla ilgili. Tasarıma başlamadan önce baskın, ikincil ve vurgu rengini belirlemek, Photoshop'ta ise değişiklikleri ayarlama katmanlarıyla tahribatsız yapmak hem zamandan kazandırıyor hem de sonucu daha profesyonel gösteriyor.</p></div>
+  <footer class="post-foot"><span class="label">Kategori: Dijital Tasarım</span><a class="link" href="#">Tüm yazılara dön <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></footer>
+</article>
+<article class="post wrap" id="responsive-tasarim" aria-labelledby="responsive-tasarim-t">
+  <a class="link back" href="#">Tüm yazılar <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a>
+  <header class="post-head">
+    <div class="row"><span class="cat"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Web Geliştirme</span><time class="date label" datetime="2026-10-08">8 Ekim 2026</time><span class="label">8 dk okuma</span><span class="label">Yazar: Yunus Emre Ersoy</span></div>
+    <h1 id="responsive-tasarim-t">Modern Web Geliştirmede Responsive Tasarım İlkeleri</h1>
+    <div class="row"><span class="label">Etiketler</span><ul class="tags"><li><button type="button" class="tag" data-key="#Responsive">#Responsive</button></li><li><button type="button" class="tag" data-key="#CSS">#CSS</button></li><li><button type="button" class="tag" data-key="#MobilÖncelikli">#MobilÖncelikli</button></li><li><button type="button" class="tag" data-key="#Erişilebilirlik">#Erişilebilirlik</button></li></ul></div>
+  </header>
+  <div class="article glass">
+<p>Bugün bir web sitesine gelen ziyaretçilerin büyük bölümü telefondan bağlanıyor. Aynı sayfanın 360 piksellik bir ekranda da 1920 piksellik bir monitörde de rahat okunması gerekiyor. Responsive (duyarlı) tasarım, tek bir kod tabanıyla tüm ekranlara uyum sağlamanın yoludur. Bu portfolyo sitesini yeniden tasarlarken uyguladığım ilkeleri aşağıda topladım.</p>
+
+<h2>1. Viewport etiketiyle başla</h2>
+<p>Bu satır olmadan mobil tarayıcılar sayfayı masaüstü genişliğinde çizip küçültür:</p>
+<p><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></p>
+
+<h2>2. Mobil öncelikli düşün</h2>
+<p>Önce en küçük ekran için tasarlayıp genişledikçe özellik eklemek, tersinden daha kolaydır. Küçük ekran sizi neyin gerçekten önemli olduğuna karar vermeye zorlar. CSS'te bu, temel stilleri yazıp büyük ekranlar için <code>@media (min-width: …)</code> blokları eklemek anlamına gelir.</p>
+
+<h2>3. Akışkan ızgaralar: Grid ve Flexbox</h2>
+<p>Sabit piksel genişlikleri yerine oranlarla çalışmak gerekir. CSS Grid'in şu satırı, sütun sayısını ekran genişliğine göre kendiliğinden ayarlar:</p>
+<p><code>grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));</code></p>
+<p>Flexbox ise <code>flex-wrap: wrap</code> ile sığmayan öğeleri alt satıra taşır. Böylece çoğu durumda medya sorgusu yazmaya bile gerek kalmaz.</p>
+
+<h2>4. clamp() ile akışkan yazı boyutları</h2>
+<p>Başlıkların her ekranda orantılı görünmesi için <code>clamp()</code> fonksiyonu çok kullanışlıdır:</p>
+<p><code>font-size: clamp(2rem, 5vw, 4rem);</code></p>
+<p>Bu tanım, yazının en az 2rem, en fazla 4rem olmasını, arada ise ekran genişliğiyle büyümesini sağlar. Gövde metninde ise satır uzunluğunu 65–75 karakter civarında tutmak okumayı kolaylaştırır.</p>
+
+<h2>5. Kırılma noktalarını içerik belirlesin</h2>
+<p>“iPhone genişliği”, “tablet genişliği” gibi cihaz ölçülerine göre değil, tasarımın bozulmaya başladığı yere göre kırılma noktası koyun. Tarayıcı penceresini yavaşça daraltın; düzen sıkıştığı anda bir medya sorgusu eklemenin zamanı gelmiştir.</p>
+
+<h2>6. Duyarlı görseller</h2>
+<ul>
+  <li><code>img { max-width: 100%; height: auto; }</code> görsellerin taşmasını engeller.</li>
+  <li><code>aspect-ratio</code> ve <code>object-fit: cover</code>, farklı boyuttaki fotoğrafları aynı çerçevede düzgün kırpar.</li>
+  <li><code>width</code> ve <code>height</code> niteliklerini yazmak, görsel yüklenirken sayfanın zıplamasını önler.</li>
+  <li><code>loading="lazy"</code>, ekranın altında kalan görsellerin sonradan yüklenmesini sağlar.</li>
+  <li><code>srcset</code> ile küçük ekranlara daha küçük dosya göndermek veri tasarrufu sağlar.</li>
+</ul>
+
+<h2>7. Dokunmayı ve erişilebilirliği unutma</h2>
+<p>Telefonda fare yoktur; düğmeler ve bağlantılar parmakla rahat basılabilecek büyüklükte, yaklaşık 44×44 piksel olmalıdır. Klavye ile gezen kullanıcılar için odak çerçevesi görünür kalmalı, metin ile arka plan arasındaki kontrast yeterli olmalıdır.</p>
+
+<blockquote>Responsive tasarım bir özellik değil, bir zorunluluktur: Ziyaretçi sitenizi hangi cihazdan açacağını size sormaz.</blockquote>
+
+<h2>8. Gerçek cihazlarda test et</h2>
+<p>Tarayıcının geliştirici araçlarındaki cihaz görünümü iyi bir başlangıçtır, ancak sayfayı mutlaka gerçek bir telefonda da açın. Yazı boyutu, dokunma alanları ve kaydırma hissi ancak böyle anlaşılır.</p>
+
+<h2>Sonuç</h2>
+<p>Akışkan ızgaralar, <code>clamp()</code> ile ölçeklenen yazılar, içerikten doğan kırılma noktaları ve duyarlı görseller bir araya geldiğinde site her ekranda kendini doğal hisseder. Bu sitenin kenar menüsünün telefonda üst çubuğa dönüşmesi ve kartların tek sütuna inmesi de aynı ilkelerin sonucu.</p></div>
+  <footer class="post-foot"><span class="label">Kategori: Web Geliştirme</span><a class="link" href="#">Tüm yazılara dön <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></footer>
+</article>
+</div>
+</main>
+<footer class="foot">
+  <div class="marquee thin" aria-hidden="true"><div class="mq-track"><div class="mq-group"><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Python</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Yapay Zekâ</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Photoshop</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>HTML · CSS</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>JavaScript</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Görsel Tasarım</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Karakalem</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Smart Object</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Akdeniz Üniversitesi</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Antalya</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Python</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Yapay Zekâ</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Photoshop</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>HTML · CSS</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>JavaScript</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Görsel Tasarım</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Karakalem</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Smart Object</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Akdeniz Üniversitesi</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Antalya</span></span></div><div class="mq-group"><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Python</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Yapay Zekâ</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Photoshop</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>HTML · CSS</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>JavaScript</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Görsel Tasarım</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Karakalem</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Smart Object</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Akdeniz Üniversitesi</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Antalya</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Python</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Yapay Zekâ</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Photoshop</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>HTML · CSS</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>JavaScript</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Görsel Tasarım</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Karakalem</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Smart Object</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Akdeniz Üniversitesi</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Antalya</span></span></div></div></div>
+  <div class="foot-mark" aria-hidden="true">Yunus Emre Ersoy</div>
+  <div class="foot-inner">
+    <div>
+      <h2>Yunus Emre Ersoy</h2>
+      <p>Akdeniz Üniversitesi Bilgisayar Programcılığı öğrencisi. Python, yapay zekâ ve görsel tasarım.</p>
+      <div class="social-row"><a class="sq" href="https://www.instagram.com/e.mre0_0/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.3-4.1a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6Z"/></svg></a><a class="sq" href="https://www.linkedin.com/in/yunus-emre-ersoy-2a3b2638a/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM2.5 9h3v12h-3zM9 9h2.9v1.7c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4.5 2.3 4.5 5.4V21h-3v-6c0-1.5-.3-3.1-2.2-3.1S12 13.3 12 15v6H9z"/></svg></a></div>
+    </div>
+    <div><h3>Levhalar</h3><ul class="cols2"><li><a href="anasayfa.html">Anasayfa</a></li><li><a href="hakkimda.html">Hakkımda</a></li><li><a href="projeler.html">Projeler</a></li><li><a href="galeri.html">Galeri</a></li><li><a href="blog-tr.html">Blog</a></li><li><a href="iletisim.html">İletişim</a></li></ul></div>
+    <div><h3>İletişim</h3><ul><li><a href="mailto:yeersoy.0715@gmail.com">yeersoy.0715@gmail.com</a></li><li><a href="tel:+905447391507">+90 544 739 15 07</a></li><li>Antalya / Burdur, Türkiye</li></ul></div>
+  </div>
+  <div class="foot-base"><span>© 2026 Yunus Emre Ersoy · Tüm hakları saklıdır</span><span>Vize projesi · Akdeniz Üniversitesi</span></div>
+</footer>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

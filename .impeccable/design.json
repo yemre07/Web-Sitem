@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-21T17:35:41+00:00",
+  "title": "Design System: Yunus Emre Ersoy Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "slate": {
+        "role": "neutral",
+        "displayName": "Plate Slate",
+        "canonical": "oklch(37.5% 0.011 236.9)",
+        "tonalRamp": [
+          "#090c0d",
+          "#212527",
+          "#3c4044",
+          "#595f62",
+          "#787e83",
+          "#9a9fa3",
+          "#c0c5c8",
+          "#ebeff1"
+        ]
+      },
+      "slate-deep": {
+        "role": "neutral",
+        "displayName": "Deep Slate",
+        "canonical": "oklch(30.9% 0.009 234.0)",
+        "tonalRamp": [
+          "#090b0d",
+          "#212426",
+          "#3c4043",
+          "#595e61",
+          "#797e81",
+          "#9a9fa2",
+          "#c1c5c7",
+          "#eceff1"
+        ]
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "Stone",
+        "canonical": "oklch(53.9% 0.007 239.9)",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#222426",
+          "#3d4042",
+          "#5b5e61",
+          "#7a7e81",
+          "#9b9fa1",
+          "#c2c4c7",
+          "#eceff0"
+        ]
+      },
+      "stone-ink": {
+        "role": "neutral",
+        "displayName": "Stone Ink",
+        "canonical": "oklch(46.5% 0.007 239.9)",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#222426",
+          "#3d4042",
+          "#5a5e61",
+          "#7a7e81",
+          "#9b9fa2",
+          "#c1c4c7",
+          "#eceff0"
+        ]
+      },
+      "fog": {
+        "role": "neutral",
+        "displayName": "Fog",
+        "canonical": "oklch(73.5% 0.005 145.5)",
+        "tonalRamp": [
+          "#0a0b0a",
+          "#232423",
+          "#3e403e",
+          "#5c5e5c",
+          "#7b7e7b",
+          "#9d9f9d",
+          "#c3c5c3",
+          "#edefed"
+        ]
+      },
+      "oat": {
+        "role": "neutral",
+        "displayName": "Oatmeal Stock",
+        "canonical": "oklch(91.9% 0.014 88.7)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#26241f",
+          "#424039",
+          "#605d56",
+          "#807d74",
+          "#a19e97",
+          "#c6c4bd",
+          "#f0eee9"
+        ]
+      },
+      "oat-light": {
+        "role": "neutral",
+        "displayName": "Light Oatmeal",
+        "canonical": "oklch(95.0% 0.010 87.5)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#252421",
+          "#41403b",
+          "#605d58",
+          "#807d77",
+          "#a09e99",
+          "#c6c4bf",
+          "#f0eeeb"
+        ]
+      },
+      "sand": {
+        "role": "neutral",
+        "displayName": "Sand",
+        "canonical": "oklch(85.0% 0.028 85.7)",
+        "tonalRamp": [
+          "#0e0b05",
+          "#28241a",
+          "#453f33",
+          "#645d4e",
+          "#847c6c",
+          "#a59e8f",
+          "#c9c3b7",
+          "#f3eee4"
+        ]
+      },
+      "madder": {
+        "role": "primary",
+        "displayName": "Madder Root Red",
+        "canonical": "oklch(50.5% 0.167 25.5)",
+        "tonalRamp": [
+          "#240000",
+          "#4b0005",
+          "#751718",
+          "#a22e2d",
+          "#ca4f4a",
+          "#e67a72",
+          "#ffa8a0",
+          "#ffdad2"
+        ]
+      },
+      "madder-deep": {
+        "role": "primary",
+        "displayName": "Deep Madder",
+        "canonical": "oklch(42.3% 0.142 25.7)",
+        "tonalRamp": [
+          "#210000",
+          "#460a0b",
+          "#6e221f",
+          "#993a35",
+          "#c05952",
+          "#dd8179",
+          "#fbada5",
+          "#ffddd7"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Home name, one word per line, Tektur caps."
+      },
+      "headline": {
+        "displayName": "Plate Head",
+        "purpose": "Inner page plate heads and, stepped down, article titles."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Section heads above a rule divider."
+      },
+      "title": {
+        "displayName": "Unit Title",
+        "purpose": "Unit, photo, plate-row, interest and CV titles, in caps."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "One sentence under a plate head, max 58ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text, max 68ch."
+      },
+      "article": {
+        "displayName": "Article",
+        "purpose": "Blog article reading text, max 68ch."
+      },
+      "label": {
+        "displayName": "Mono Label",
+        "purpose": "Numbers, captions, dates, nav, buttons, filters; tracked caps."
+      }
+    },
+    "shadows": [
+      {
+        "name": "portrait-lift",
+        "value": "0 24px 48px -20px rgba(20, 22, 24, .7)",
+        "purpose": "Framed portrait on the carved slate hero panel only."
+      },
+      {
+        "name": "menu-drop",
+        "value": "0 24px 40px -24px rgba(20, 22, 24, .5)",
+        "purpose": "Open mobile plate index."
+      },
+      {
+        "name": "key-drop",
+        "value": "drop-shadow(0 2px 3px rgba(0, 0, 0, .35))",
+        "purpose": "Red key unit locked into the ornament band (filter, not box-shadow)."
+      },
+      {
+        "name": "inset-plate-frame",
+        "value": "inset 0 0 0 4px var(--madder), inset 0 0 0 5px rgba(241, 238, 231, .75)",
+        "purpose": "Printed inner keyline on the primary button; the ghost variant uses oat and slate."
+      },
+      {
+        "name": "focus-halo",
+        "value": "inset 0 0 0 1px var(--slate), 0 0 0 3px rgba(176, 46, 46, .25)",
+        "purpose": "Form field focus."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "All movement: a long settling ease-out."
+      },
+      {
+        "name": "ornament-turn",
+        "value": "rotate(45deg), .5s",
+        "purpose": "Ornament units turn on the diagonal on hover (nav, links)."
+      },
+      {
+        "name": "media-zoom",
+        "value": "scale(1.03 to 1.04), .8s",
+        "purpose": "Unit and photo images on hover."
+      },
+      {
+        "name": "band-lock",
+        "value": "1.1s, .35s delay; translateX(46vw) rotate(-180deg) to rest",
+        "purpose": "The red key slides into the band and locks on page load."
+      },
+      {
+        "name": "unit-lock",
+        "value": ".55s; translateY(-14px) rotate(-90deg) to rest",
+        "purpose": "A red lock diamond drops into a unit's top keyline on hover or focus."
+      },
+      {
+        "name": "plate-in",
+        "value": ".6s; clip-path inset(0 0 100% 0) to inset(0)",
+        "purpose": "Lightbox photo revealed top-down as a plate."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all durations .01ms",
+        "purpose": "prefers-reduced-motion collapses every animation and transition."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "1180px"
+      },
+      {
+        "name": "rail",
+        "value": "960px"
+      },
+      {
+        "name": "phone",
+        "value": "620px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one madder action per view, with a printed inset keyline.",
+      "html": "<a class=\"ds-btn\" href=\"#\">See the work <svg class=\"ds-u\" viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z\"/><path class=\"a\" d=\"M16 11l5 5-5 5-5-5Z\"/></svg></a>",
+      "css": ":host{--slate:#3c4246;--slate-deep:#2c3134;--stone:#6b6f72;--stone-ink:#565a5d;--fog:#a7aaa7;--oat:#e8e4da;--oat-light:#f1eee7;--sand:#d6cdba;--madder:#b02e2e;--madder-deep:#8b2121;--ease:cubic-bezier(.16,1,.3,1)}.ds-u{width:14px;height:14px;fill:currentColor;flex:none}.ds-u .a{fill:#b02e2e}.ds-btn{display:inline-flex;align-items:center;gap:14px;padding:16px 20px;font:500 .74rem/1 'Martian Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border:1px solid var(--madder-deep);background:var(--madder);color:var(--oat-light);box-shadow:inset 0 0 0 4px var(--madder),inset 0 0 0 5px rgba(241,238,231,.75);transition:background .25s,box-shadow .25s,transform .25s var(--ease)}.ds-btn .ds-u .a{fill:var(--oat-light)}.ds-btn:hover{background:var(--madder-deep);box-shadow:inset 0 0 0 4px var(--madder-deep),inset 0 0 0 5px rgba(241,238,231,.9)}.ds-btn:active{transform:translateY(1px)}.ds-btn:focus-visible{outline:2px solid var(--madder);outline-offset:3px}"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action: slate keyline frame on oat, inverts to slate on hover.",
+      "html": "<a class=\"ds-ghost\" href=\"#\">Write to me <svg class=\"ds-u\" viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z\"/><path class=\"a\" d=\"M16 11l5 5-5 5-5-5Z\"/></svg></a>",
+      "css": ":host{--slate:#3c4246;--slate-deep:#2c3134;--stone:#6b6f72;--stone-ink:#565a5d;--fog:#a7aaa7;--oat:#e8e4da;--oat-light:#f1eee7;--sand:#d6cdba;--madder:#b02e2e;--madder-deep:#8b2121;--ease:cubic-bezier(.16,1,.3,1)}.ds-u{width:14px;height:14px;fill:currentColor;flex:none}.ds-u .a{fill:#b02e2e}.ds-ghost{display:inline-flex;align-items:center;gap:14px;padding:16px 20px;font:500 .74rem/1 'Martian Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border:1px solid var(--slate);background:transparent;color:var(--slate);box-shadow:inset 0 0 0 4px var(--oat),inset 0 0 0 5px var(--slate);transition:background .25s,box-shadow .25s,color .25s}.ds-ghost:hover{background:var(--slate);color:var(--oat-light);box-shadow:inset 0 0 0 4px var(--slate),inset 0 0 0 5px var(--oat)}.ds-ghost:focus-visible{outline:2px solid var(--madder);outline-offset:3px}"
+    },
+    {
+      "name": "Ruled Link",
+      "kind": "custom",
+      "refersTo": "link-ruled",
+      "description": "Mono caps link on a 1px slate rule; the diamond turns on hover.",
+      "html": "<a class=\"ds-link\" href=\"#\">All projects <svg class=\"ds-u\" viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z\"/><path class=\"a\" d=\"M16 11l5 5-5 5-5-5Z\"/></svg></a>",
+      "css": ":host{--slate:#3c4246;--slate-deep:#2c3134;--stone:#6b6f72;--stone-ink:#565a5d;--fog:#a7aaa7;--oat:#e8e4da;--oat-light:#f1eee7;--sand:#d6cdba;--madder:#b02e2e;--madder-deep:#8b2121;--ease:cubic-bezier(.16,1,.3,1)}.ds-u{width:14px;height:14px;fill:currentColor;flex:none}.ds-u .a{fill:#b02e2e}.ds-link{display:inline-flex;align-items:center;gap:10px;font:500 .74rem/1 'Martian Mono',ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:var(--slate);padding-bottom:8px;border-bottom:1px solid var(--slate)}.ds-link .ds-u{width:11px;height:11px;color:var(--madder);transition:transform .4s var(--ease)}.ds-link:hover{color:var(--madder)}.ds-link:hover .ds-u{transform:translateX(4px) rotate(45deg)}.ds-link:focus-visible{outline:2px solid var(--madder);outline-offset:3px}"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "nav-item",
+      "description": "Numbered plate index; the active plate sits in an oat-light cell with madder label and number.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\"><svg class=\"ds-u ds-nu\" viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z\"/><path class=\"a\" d=\"M16 11l5 5-5 5-5-5Z\"/></svg><span>Home</span><span class=\"n\">01</span></a><a href=\"#\"><svg class=\"ds-u ds-nu\" viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z\"/><path class=\"a\" d=\"M16 11l5 5-5 5-5-5Z\"/></svg><span>About</span><span class=\"n\">02</span></a><a href=\"#\"><svg class=\"ds-u ds-nu\" viewBox=\"0 0 32 32\" aria-hidden=\"true\"><path fill-rule=\"evenodd\" d=\"M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z\"/><path class=\"a\" d=\"M16 11l5 5-5 5-5-5Z\"/></svg><span>Projects</span><span class=\"n\">03</span></a></nav>",
+      "css": ":host{--slate:#3c4246;--slate-deep:#2c3134;--stone:#6b6f72;--stone-ink:#565a5d;--fog:#a7aaa7;--oat:#e8e4da;--oat-light:#f1eee7;--sand:#d6cdba;--madder:#b02e2e;--madder-deep:#8b2121;--ease:cubic-bezier(.16,1,.3,1)}.ds-u{width:14px;height:14px;fill:currentColor;flex:none}.ds-u .a{fill:#b02e2e}.ds-nav{display:grid;gap:2px;width:200px;background:var(--oat);padding:8px}.ds-nav a{display:grid;grid-template-columns:30px 1fr auto;align-items:center;gap:12px;padding:10px 8px;text-decoration:none;font:500 .72rem/1.2 'Martian Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);border:1px solid transparent;transition:border-color .3s var(--ease),color .2s}.ds-nav .ds-nu{width:26px;height:26px;color:var(--slate);transition:transform .5s var(--ease)}.ds-nav .ds-nu .a{fill:var(--stone)}.ds-nav .n{color:var(--stone-ink)}.ds-nav a:hover{border-color:var(--fog);color:var(--slate-deep)}.ds-nav a:hover .ds-nu{transform:rotate(45deg)}.ds-nav a[aria-current=page]{color:var(--madder);border-color:var(--slate);background:var(--oat-light)}.ds-nav a[aria-current=page] .ds-nu{color:var(--madder)}.ds-nav a[aria-current=page] .ds-nu .a{fill:var(--slate)}.ds-nav a[aria-current=page] .n{color:var(--madder)}.ds-nav a:focus-visible{outline:2px solid var(--madder);outline-offset:3px}"
+    },
+    {
+      "name": "Filter Bar",
+      "kind": "chip",
+      "refersTo": "filter",
+      "description": "Shared-keyline filter strip; the pressed diamond fills madder and turns.",
+      "html": "<div class=\"ds-filters\"><button aria-pressed=\"true\">All</button><button aria-pressed=\"false\">Design</button><button aria-pressed=\"false\">Code</button></div>",
+      "css": ":host{--slate:#3c4246;--slate-deep:#2c3134;--stone:#6b6f72;--stone-ink:#565a5d;--fog:#a7aaa7;--oat:#e8e4da;--oat-light:#f1eee7;--sand:#d6cdba;--madder:#b02e2e;--madder-deep:#8b2121;--ease:cubic-bezier(.16,1,.3,1)}.ds-filters{display:flex;border:1px solid var(--slate);width:fit-content}.ds-filters button{position:relative;appearance:none;border:0;border-right:1px solid var(--slate);background:transparent;color:var(--slate);font:500 .7rem/1 'Martian Mono',monospace;letter-spacing:.14em;text-transform:uppercase;padding:14px 18px 14px 36px;cursor:pointer;transition:background .2s,color .2s}.ds-filters button:last-child{border-right:0}.ds-filters button::before{content:'';position:absolute;left:14px;top:50%;width:9px;height:9px;margin-top:-4.5px;border:1px solid var(--stone);transform:rotate(45deg);transition:background .3s,border-color .3s,transform .5s var(--ease)}.ds-filters button:hover{background:var(--oat-light)}.ds-filters button[aria-pressed=true]{background:var(--slate);color:var(--oat-light)}.ds-filters button[aria-pressed=true]::before{background:var(--madder);border-color:var(--madder);transform:rotate(225deg)}.ds-filters button:focus-visible{outline:2px solid var(--madder);outline-offset:3px}"
+    },
+    {
+      "name": "Tag and Category",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Stone-outlined tags that fill madder when pressed; a solid slate category chip.",
+      "html": "<div class=\"ds-row\"><span class=\"ds-cat\">Web Development</span><button class=\"ds-tag\" aria-pressed=\"false\">python</button><button class=\"ds-tag\" aria-pressed=\"true\">css</button></div>",
+      "css": ":host{--slate:#3c4246;--slate-deep:#2c3134;--stone:#6b6f72;--stone-ink:#565a5d;--fog:#a7aaa7;--oat:#e8e4da;--oat-light:#f1eee7;--sand:#d6cdba;--madder:#b02e2e;--madder-deep:#8b2121;--ease:cubic-bezier(.16,1,.3,1)}.ds-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.ds-cat{display:inline-flex;padding:7px 10px;background:var(--slate);color:var(--oat-light);font:500 .72rem/1 'Martian Mono',monospace;letter-spacing:.14em;text-transform:uppercase}.ds-tag{appearance:none;border:1px solid var(--stone);background:transparent;color:var(--slate);padding:6px 9px;font:500 .72rem/1 'Martian Mono',monospace;letter-spacing:.08em;cursor:pointer;transition:background .2s,color .2s,border-color .2s}.ds-tag:hover,.ds-tag[aria-pressed=true]{background:var(--madder);border-color:var(--madder);color:var(--oat-light)}.ds-tag:focus-visible{outline:2px solid var(--madder);outline-offset:3px}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Square oat-light field with mono caps label and a madder focus halo.",
+      "html": "<label class=\"ds-field\"><span>Your name</span><input placeholder=\"Name Surname\"></label>",
+      "css": ":host{--slate:#3c4246;--slate-deep:#2c3134;--stone:#6b6f72;--stone-ink:#565a5d;--fog:#a7aaa7;--oat:#e8e4da;--oat-light:#f1eee7;--sand:#d6cdba;--madder:#b02e2e;--madder-deep:#8b2121;--ease:cubic-bezier(.16,1,.3,1)}.ds-field{display:grid;gap:8px;max-width:320px}.ds-field span{font:500 .72rem/1.3 'Martian Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--slate)}.ds-field input{font:400 1rem/1.5 Commissioner,'Segoe UI',sans-serif;color:var(--slate-deep);background:var(--oat-light);border:1px solid var(--slate);border-radius:0;padding:13px 14px;transition:border-color .2s,box-shadow .2s}.ds-field input::placeholder{color:var(--stone-ink)}.ds-field input:focus{outline:none;box-shadow:inset 0 0 0 1px var(--slate),0 0 0 3px rgba(176,46,46,.25)}"
+    },
+    {
+      "name": "Project Unit",
+      "kind": "card",
+      "refersTo": "unit",
+      "description": "Keylined oat-light unit: sand media well, shared-keyline caption row, red lock diamond on hover.",
+      "html": "<article class=\"ds-unit\"><div class=\"ds-media\"></div><div class=\"ds-labels\"><span class=\"no\">P-01</span><span>Charcoal</span><span class=\"ty\">Design</span></div><div class=\"ds-body\"><h3>Charcoal Colorization</h3><p>A charcoal drawing brought to colour in Photoshop.</p></div></article>",
+      "css": ":host{--slate:#3c4246;--slate-deep:#2c3134;--stone:#6b6f72;--stone-ink:#565a5d;--fog:#a7aaa7;--oat:#e8e4da;--oat-light:#f1eee7;--sand:#d6cdba;--madder:#b02e2e;--madder-deep:#8b2121;--ease:cubic-bezier(.16,1,.3,1)}.ds-unit{position:relative;border:1px solid var(--slate);background:var(--oat-light);max-width:340px}.ds-media{aspect-ratio:4/3;background:var(--sand);border-bottom:1px solid var(--slate)}.ds-labels{display:grid;grid-template-columns:auto minmax(0,1fr) auto;border-bottom:1px solid var(--slate)}.ds-labels>*{padding:10px 14px;border-right:1px solid var(--slate);font:500 .72rem/1.5 'Martian Mono',monospace;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ds-labels>*:last-child{border-right:0}.ds-labels .no{color:var(--madder)}.ds-labels .ty{color:var(--stone-ink)}.ds-body{padding:20px 20px 22px}.ds-body h3{margin:0 0 10px;font:700 1.3rem/1.02 Tektur,Commissioner,sans-serif;text-transform:uppercase;letter-spacing:.02em;color:var(--slate)}.ds-body p{margin:0;font:400 .97rem/1.6 Commissioner,sans-serif;color:var(--slate-deep)}.ds-unit::before{content:'';position:absolute;top:-7px;left:50%;width:12px;height:12px;margin-left:-6px;background:var(--madder);transform:translateY(-14px) rotate(-45deg);opacity:0;transition:transform .55s var(--ease),opacity .3s}.ds-unit:hover::before,.ds-unit:focus-within::before{opacity:1;transform:rotate(45deg)}"
+    },
+    {
+      "name": "Ornament Band",
+      "kind": "custom",
+      "refersTo": "band",
+      "description": "Repeating kilim diamond chain on slate with slate-deep edge rules; divides every plate head from its body.",
+      "html": "<div class=\"ds-band\"></div>",
+      "css": ".ds-band{height:36px;background-color:#3c4246;background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='288' height='36' viewBox='0 0 288 36'%3E%3Cg fill='none' stroke='%23d6cdba' stroke-width='3'%3E%3Cpath d='M0 18 18 4l18 14-18 14zM36 18 54 4l18 14-18 14zM72 18 90 4l18 14-18 14zM108 18l18-14 18 14-18 14zM144 18l18-14 18 14-18 14zM180 18l18-14 18 14-18 14zM216 18l18-14 18 14-18 14zM252 18l18-14 18 14-18 14z'/%3E%3C/g%3E%3Cg fill='%23d6cdba'%3E%3Cpath d='M18 12l6 6-6 6-6-6zM90 12l6 6-6 6-6-6zM162 12l6 6-6 6-6-6zM234 12l6 6-6 6-6-6z'/%3E%3C/g%3E%3Cg fill='%23b02e2e'%3E%3Cpath d='M54 11l7 7-7 7-7-7zM198 11l7 7-7 7-7-7z'/%3E%3C/g%3E%3Cg fill='%23a7aaa7'%3E%3Cpath d='M126 15l3 3-3 3-3-3zM270 15l3 3-3 3-3-3z'/%3E%3C/g%3E%3C/svg%3E\");background-repeat:repeat-x;background-position:0 center;border-block:3px solid #2c3134}"
+    },
+    {
+      "name": "Stitch Meter",
+      "kind": "custom",
+      "refersTo": "stitch",
+      "description": "Skill level as rotated-square stitches; the last lit stitch is madder.",
+      "html": "<div class=\"ds-skill\"><span class=\"nm\">Python</span><span class=\"ds-stitch\"><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i class=\"on peak\"></i><i></i><i></i></span><span class=\"v\">86</span></div>",
+      "css": ":host{--slate:#3c4246;--slate-deep:#2c3134;--stone:#6b6f72;--stone-ink:#565a5d;--fog:#a7aaa7;--oat:#e8e4da;--oat-light:#f1eee7;--sand:#d6cdba;--madder:#b02e2e;--madder-deep:#8b2121;--ease:cubic-bezier(.16,1,.3,1)}.ds-skill{display:grid;grid-template-columns:8em auto 3.4em;align-items:center;gap:18px;padding:16px 0;border-block:1px solid var(--slate);max-width:420px}.ds-skill .nm{font:700 1.05rem/1.2 Tektur,sans-serif;text-transform:uppercase;letter-spacing:.03em;color:var(--slate)}.ds-stitch{display:flex;gap:3px}.ds-stitch i{width:13px;height:13px;transform:rotate(45deg) scale(.78);border:1px solid var(--stone)}.ds-stitch i.on{background:var(--slate);border-color:var(--slate)}.ds-stitch i.peak{background:var(--madder);border-color:var(--madder)}.ds-skill .v{font:500 .8rem/1 'Martian Mono',monospace;text-align:right;color:var(--slate);font-variant-numeric:tabular-nums}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Pattern Plate Book",
+    "overview": "The site is a printed ornament plate book. Every page is a numbered Plate (Levha), and every project, photograph and article is a numbered unit framed in a fine slate keyline, with a ruled caption at its foot. The stock is oatmeal paper and carved slate; the only colour that is not stone or paper is madder (kökboya), the kilim root dye, which marks what is selected, numbered, or the one action asked of the visitor. The world comes from the Breton ornament program, fused with Anatolian kilim and Seljuk stone geometry: diamonds, eight-point stars and hooked rhombi drawn as hard-edged SVG units, and a repeating border band that separates every plate head from its body.\n\nDensity is that of a catalogue, not a landing page. Cells share keylines instead of floating with gaps; captions are set in tracked mono caps; headings are constructed Tektur capitals with squared terminals. A fixed left rail holds the monogram, the numbered plate index (01 to 06), the TR/EN switch and a plate box naming the current plate. Motion is a single grammar: ornament units turn on the diagonal (45 degrees) and settle with a long ease-out, and the red key unit slides into the border band and locks.",
+    "keyCharacteristics": [
+      "Oat ground, oat-light raised units, sand recessed media wells, slate panels and footer.",
+      "1px slate keylines around and between every unit; square corners everywhere.",
+      "One red: madder, for the active state, plate numbers, the primary action and focus.",
+      "Three type voices: Tektur caps (names, headings), Commissioner (reading), Martian Mono tracked caps (numbers, captions, controls).",
+      "Ornament as structure: the band, rule dividers, corner studs and SVG units, never as wallpaper."
+    ],
+    "rules": [
+      {
+        "name": "The Kökboya Rule",
+        "body": "Madder is the only chromatic colour. It marks the selected unit, the plate number, the focus ring and the one primary action per view; it never fills a surface larger than a button or chip.",
+        "section": "colors"
+      },
+      {
+        "name": "The Plate Stock Rule",
+        "body": "Surfaces come only from oat, oat-light, sand, slate and slate-deep. A unit is raised by stepping from oat to oat-light, recessed by sand, and inverted by slate; never by a new hue.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Voices Rule",
+        "body": "Tektur speaks only in capitals for names and headings; Commissioner carries every sentence; Martian Mono carries every number, caption and control. Do not cross the roles.",
+        "section": "typography"
+      },
+      {
+        "name": "The Numbered Unit Rule",
+        "body": "Every plate and unit carries a mono number (01, P-01, F-01) in madder or stone-ink; numbers are tabular and sit in the caption row, not above the heading as a kicker.",
+        "section": "typography"
+      },
+      {
+        "name": "The Shared Keyline Rule",
+        "body": "Cells in a row share one 1px slate border; units in a free grid each own theirs. Never both a gap and a doubled border.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Plate Rule",
+        "body": "Units, cards, fields and panels never cast shadows. Lift a surface with oat-light or invert it with slate.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Square Corner Rule",
+        "body": "No border-radius anywhere. Softness, where it is wanted, comes from turning a square 45 degrees.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** frame every unit, cell, field and panel in a 1px slate keyline with square corners.",
+      "**Do** reserve madder for the selected state, plate and unit numbers, focus, and the single primary action in a view.",
+      "**Do** set every number, caption, date and control label in Martian Mono caps at 0.7 to 0.74rem with 0.12 to 0.16em tracking.",
+      "**Do** open every inner page with a plate head followed directly by the ornament band.",
+      "**Do** draw ornament as hard-edged inline SVG units with one accent path, and turn them on the diagonal (45 degrees) for hover.",
+      "**Do** use the ease cubic-bezier(.16, 1, .3, 1) for movement and honour prefers-reduced-motion."
+    ],
+    "donts": [
+      "**Don't** round corners; radius is 0px everywhere.",
+      "**Don't** introduce a second chromatic hue or use madder as a large surface fill.",
+      "**Don't** put shadows on units, cards or fields; only the portrait, the open mobile menu and the band key carry one.",
+      "**Don't** place a mono label above a heading as a kicker; numbers and labels sit in caption rows, beside headings, or in the plate box.",
+      "**Don't** use icon fonts or emoji; every icon is an inline SVG ornament unit or a simple stroked SVG.",
+      "**Don't** set Tektur in lowercase or for running text."
+    ]
+  }
+}

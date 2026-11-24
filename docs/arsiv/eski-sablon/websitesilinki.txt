@@ -1,0 +1,5 @@
+
+Template İsmi: FolioOne
+Template Sitesi: https://bootstrapmade.com/folioone-bootstrap-portfolio-website-template/
+Yazar : BootstrapMade.com
+Lisansı: https://bootstrapmade.com/license/

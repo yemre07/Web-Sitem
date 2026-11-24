@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "*.html"
+        ],
+        "createdAt": "2026-11-21T17:27:51.445Z",
+        "reason": "User chose the Breton ornament program world on the decision page; its oatmeal #E8E4DA plate-stock ground is that world's palette"
+      }
+    ]
+  }
+}

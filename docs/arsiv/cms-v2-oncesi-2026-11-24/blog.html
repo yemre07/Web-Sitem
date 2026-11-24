@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog · Yunus Emre Ersoy</title>
+<meta name="description" content="Articles on vibe coding, colour theory in Photoshop and responsive design principles.">
+<meta name="author" content="Yunus Emre Ersoy">
+<meta name="theme-color" content="#07080d">
+<link rel="alternate" hreflang="en" href="blog.html">
+<link rel="alternate" hreflang="tr" href="blog-tr.html">
+<link rel="preload" href="assets/fonts/tektur-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2310131c' d='M16 1 31 16 16 31 1 16Z'/%3E%3Cpath fill='%23ff6b6b' d='M16 9l7 7-7 7-7-7Z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body data-page="blog">
+<a class="skip" href="#main">Skip to content</a>
+<div class="fx-layer" aria-hidden="true">
+  <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span>
+  <canvas id="net"></canvas>
+  <span class="grid-tex"></span><span class="grain"></span>
+</div>
+<div class="cursor-glow" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
+<header class="navbar">
+  <a class="brand" href="index.html"><svg class="mono-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ye-mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6b6b"/><stop offset=".55" stop-color="#ffb86b"/><stop offset="1" stop-color="#9d8cff"/></linearGradient></defs><path fill="url(#ye-mg)" fill-rule="evenodd" d="M32 1 63 32 32 63 1 32Zm0 6L7 32l25 25 25-25Z"/><path fill="#10131c" stroke="url(#ye-mg)" stroke-width="1.5" d="M32 12 52 32 32 52 12 32Z"/><text x="32" y="37.5" text-anchor="middle" font-family="Tektur, sans-serif" font-weight="800" font-size="14" fill="#f4f1ff" letter-spacing=".5">YE</text></svg><span class="brand-name">Yunus Emre<small> Ersoy</small></span></a>
+  <nav class="nav main-nav" aria-label="Main menu"><ol><li><a href="index.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Home</span><span class="num">01</span></a></li><li><a href="about.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 3 29 16 16 29 3 16Zm0 5-8 8 8 8 8-8Z"/><path d="M1 14h4v4H1zM27 14h4v4h-4zM14 1h4v4h-4zM14 27h4v4h-4z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg><span>About</span><span class="num">02</span></a></li><li><a href="projects.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Projects</span><span class="num">03</span></a></li><li><a href="gallery.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M3 3h17v17H3Zm4 4v9h9V7Z"/><path fill-rule="evenodd" d="M12 12h17v17H12Zm4 4v9h9v-9Z"/><path class="a" d="M12 12h4v4h-4z"/></svg><span>Gallery</span><span class="num">04</span></a></li><li><a href="blog.html" aria-current="page"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg><span>Blog</span><span class="num">05</span></a></li><li><a href="contact.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M14 2h4v4h-4zM9 7h4v4H9zM19 7h4v4h-4zM4 12h4v4H4zM24 12h4v4h-4zM9 17h4v4H9zM19 17h4v4h-4zM14 22h4v4h-4zM4 16h4v4H4zM24 16h4v4h-4z"/><path class="a" d="M14 12h4v8h-4z"/></svg><span>Contact</span><span class="num">06</span></a></li></ol></nav>
+  <div class="nav-tools">
+    <div class="lang" role="group" aria-label="Language"><a href="blog-tr.html" hreflang="tr" lang="tr" data-lang-switch title="Türkçe">TR</a><span aria-current="true">EN</span></div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0 16 8 8 16 0 8Zm0 4L4 8l4 4 4-4Z" fill="currentColor" fill-rule="evenodd"/></svg>Menu</button>
+  </div>
+</header>
+<nav class="nav mobile-nav" id="mobile-nav" hidden aria-label="Mobile menu"><ol><li><a href="index.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Home</span><span class="num">01</span></a></li><li><a href="about.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 3 29 16 16 29 3 16Zm0 5-8 8 8 8 8-8Z"/><path d="M1 14h4v4H1zM27 14h4v4h-4zM14 1h4v4h-4zM14 27h4v4h-4z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg><span>About</span><span class="num">02</span></a></li><li><a href="projects.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Projects</span><span class="num">03</span></a></li><li><a href="gallery.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M3 3h17v17H3Zm4 4v9h9V7Z"/><path fill-rule="evenodd" d="M12 12h17v17H12Zm4 4v9h9v-9Z"/><path class="a" d="M12 12h4v4h-4z"/></svg><span>Gallery</span><span class="num">04</span></a></li><li><a href="blog.html" aria-current="page"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg><span>Blog</span><span class="num">05</span></a></li><li><a href="contact.html"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M14 2h4v4h-4zM9 7h4v4H9zM19 7h4v4h-4zM4 12h4v4H4zM24 12h4v4h-4zM9 17h4v4H9zM19 17h4v4h-4zM14 22h4v4h-4zM4 16h4v4H4zM24 16h4v4h-4z"/><path class="a" d="M14 12h4v8h-4z"/></svg><span>Contact</span><span class="num">06</span></a></li></ol></nav>
+<main id="main">
+<div class="blog">
+<div class="post-list">
+<header class="wrap plate-head">
+  <div class="ph-copy"><p class="kicker"><span class="dot"></span>Plate 05 / 06</p><h1><span class="grad-text">Blog</span></h1><p class="lead">Notes on software, design and the web. Click a category or tag to filter the articles.</p></div>
+  <div class="ph-orbit" aria-hidden="true"><span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span><i class="sat s1"></i><i class="sat s2"></i><i class="sat s3"></i><svg class="u unit-big" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg></div>
+</header>
+<div class="beam" aria-hidden="true"></div>
+<section class="wrap sec" aria-label="Articles">
+  <div class="post-index" data-cms="blogCards"><article class="post-card glass tilt soft" data-keys="Software Development|#AI|#VibeCoding|#Python|#Productivity">
+    <div class="meta"><time class="date" datetime="2026-11-14">14 November 2026</time><span class="date">6 min read</span></div>
+    <div>
+      <button type="button" class="cat" data-key="Software Development" aria-pressed="false" style="border:0;cursor:pointer"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Software Development</button>
+      <h2><a href="#vibe-coding">AI-Assisted Software Development: What Is Vibe Coding?</a></h2>
+      <p>Describing what you want and letting an AI write the code instead of typing it line by line: fast or risky? Vibe coding&#39;s upsides, traps and a healthy-use checklist, from a student&#39;s point of view.</p>
+      <ul class="tags" aria-label="Tags"><li><button type="button" class="tag" data-key="#AI" aria-pressed="false">#AI</button></li><li><button type="button" class="tag" data-key="#VibeCoding" aria-pressed="false">#VibeCoding</button></li><li><button type="button" class="tag" data-key="#Python" aria-pressed="false">#Python</button></li><li><button type="button" class="tag" data-key="#Productivity" aria-pressed="false">#Productivity</button></li></ul>
+      <p style="margin:18px 0 0"><a class="link" href="#vibe-coding">Read the article <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></p>
+    </div>
+    <span class="glare" aria-hidden="true"></span><svg class="u u-big" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg>
+  </article>
+<article class="post-card glass tilt soft" data-keys="Digital Design|#Photoshop|#ColorTheory|#GraphicDesign|#Poster">
+    <div class="meta"><time class="date" datetime="2026-10-29">29 October 2026</time><span class="date">7 min read</span></div>
+    <div>
+      <button type="button" class="cat" data-key="Digital Design" aria-pressed="false" style="border:0;cursor:pointer"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Digital Design</button>
+      <h2><a href="#renk-teorisi">Color Theory in Adobe Photoshop and Digital Design</a></h2>
+      <p>The colour wheel, harmony schemes, the 60-30-10 rule and practical ways to control colour in Photoshop, with examples from my colorization and poster projects.</p>
+      <ul class="tags" aria-label="Tags"><li><button type="button" class="tag" data-key="#Photoshop" aria-pressed="false">#Photoshop</button></li><li><button type="button" class="tag" data-key="#ColorTheory" aria-pressed="false">#ColorTheory</button></li><li><button type="button" class="tag" data-key="#GraphicDesign" aria-pressed="false">#GraphicDesign</button></li><li><button type="button" class="tag" data-key="#Poster" aria-pressed="false">#Poster</button></li></ul>
+      <p style="margin:18px 0 0"><a class="link" href="#renk-teorisi">Read the article <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></p>
+    </div>
+    <span class="glare" aria-hidden="true"></span><svg class="u u-big" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M3 3h17v17H3Zm4 4v9h9V7Z"/><path fill-rule="evenodd" d="M12 12h17v17H12Zm4 4v9h9v-9Z"/><path class="a" d="M12 12h4v4h-4z"/></svg>
+  </article>
+<article class="post-card glass tilt soft" data-keys="Web Development|#Responsive|#CSS|#MobileFirst|#Accessibility">
+    <div class="meta"><time class="date" datetime="2026-10-08">8 October 2026</time><span class="date">8 min read</span></div>
+    <div>
+      <button type="button" class="cat" data-key="Web Development" aria-pressed="false" style="border:0;cursor:pointer"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Web Development</button>
+      <h2><a href="#responsive-tasarim">Principles of Responsive Design in Modern Web Development</a></h2>
+      <p>From the viewport tag to fluid type with clamp(), from CSS Grid to responsive images: the core principles that make a site look right on phones, tablets and desktops.</p>
+      <ul class="tags" aria-label="Tags"><li><button type="button" class="tag" data-key="#Responsive" aria-pressed="false">#Responsive</button></li><li><button type="button" class="tag" data-key="#CSS" aria-pressed="false">#CSS</button></li><li><button type="button" class="tag" data-key="#MobileFirst" aria-pressed="false">#MobileFirst</button></li><li><button type="button" class="tag" data-key="#Accessibility" aria-pressed="false">#Accessibility</button></li></ul>
+      <p style="margin:18px 0 0"><a class="link" href="#responsive-tasarim">Read the article <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></p>
+    </div>
+    <span class="glare" aria-hidden="true"></span><svg class="u u-big" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg>
+  </article></div>
+  <p class="filter-note" aria-live="polite"></p>
+</section>
+</div>
+<div class="posts" data-cms="blogPosts"><article class="post wrap" id="vibe-coding" aria-labelledby="vibe-coding-t">
+  <a class="link back" href="#">All articles <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a>
+  <header class="post-head">
+    <div class="row"><span class="cat"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Software Development</span><time class="date label" datetime="2026-11-14">14 November 2026</time><span class="label">6 min read</span><span class="label">By: Yunus Emre Ersoy</span></div>
+    <h1 id="vibe-coding-t">AI-Assisted Software Development: What Is Vibe Coding?</h1>
+    <div class="row"><span class="label">Tags</span><ul class="tags"><li><button type="button" class="tag" data-key="#AI">#AI</button></li><li><button type="button" class="tag" data-key="#VibeCoding">#VibeCoding</button></li><li><button type="button" class="tag" data-key="#Python">#Python</button></li><li><button type="button" class="tag" data-key="#Productivity">#Productivity</button></li></ul></div>
+  </header>
+  <div class="article glass"><p>In February 2025, AI researcher Andrej Karpathy used the phrase “vibe coding” to describe a new way of writing software: the programmer explains what they want in plain language, a language model writes most of the code, and the human runs the result and steers by feel. The term quickly became one of the most talked-about ideas in software.</p>
+<p>As a computer programming student, this concerns me directly. On one hand we are learning algorithms and syntax; on the other, tools that can do the same job in seconds get better every day. So how should we use them?</p>
+
+<h2>How does vibe coding work?</h2>
+<p>It is the classic “write, compile, debug” loop turned into a conversation:</p>
+<ol>
+  <li><strong>Describe the goal:</strong> “Write a Python script that averages the grades in a CSV file.”</li>
+  <li><strong>Run the generated code:</strong> The model gives you a draft and you run it.</li>
+  <li><strong>Give feedback:</strong> You paste the error message or the unexpected output back to the model.</li>
+  <li><strong>Repeat:</strong> The loop continues until the program does what you want.</li>
+</ol>
+<p>Ideas and verification matter more than typing here. Whoever can describe the goal clearly gets the better result.</p>
+
+<h2>Where does it really help?</h2>
+<ul>
+  <li><strong>Quick prototypes:</strong> getting a working draft in a few hours to see whether an idea holds up.</li>
+  <li><strong>Repetitive code:</strong> form validation, file reading, simple API calls, the patterns every project needs.</li>
+  <li><strong>Learning:</strong> exploring an unfamiliar library through example code and asking “what does this line do?”</li>
+  <li><strong>Small tools:</strong> one-off scripts that make your own work easier.</li>
+</ul>
+
+<h2>Traps to watch for</h2>
+<p>An AI can write wrong code in a very confident voice. The most common problems are:</p>
+<ul>
+  <li><strong>Shipping code you don't understand:</strong> code accepted because it runs, without knowing its logic, becomes impossible to fix at the first bug.</li>
+  <li><strong>Security holes:</strong> passwords hard-coded into the source and unchecked user input show up often.</li>
+  <li><strong>Libraries that don't exist:</strong> a model sometimes invents a package or function name.</li>
+  <li><strong>Missing tests:</strong> code that gave the right answer once can break on different input.</li>
+</ul>
+<blockquote>The AI can write the code, but responsibility for it always stays with the person who adds it to the project.</blockquote>
+
+<h2>A healthy-use checklist for students</h2>
+<ul>
+  <li>Read every generated line, and ask the model to explain anything you don't understand.</li>
+  <li>Try to solve the problem yourself first, then compare with the AI's solution.</li>
+  <li>Move in small steps: ask for one function at a time instead of a whole program.</li>
+  <li>Write at least one simple test for each important function, e.g. <code>assert average([2, 4]) == 3</code>.</li>
+  <li>Never paste personal data, passwords or API keys into the chat.</li>
+  <li>Follow your course rules: find out whether AI use is allowed for each assignment or exam.</li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>Vibe coding doesn't end programming; it changes the programmer's role. A good developer is no longer only someone who types code, but someone who asks the right question, judges the output and thinks about the system as a whole. That makes learning the fundamentals more important than ever: only someone who knows the subject can catch the AI's mistakes.</p></div>
+  <footer class="post-foot"><span class="label">Category: Software Development</span><a class="link" href="#">Back to all articles <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></footer>
+</article>
+<article class="post wrap" id="renk-teorisi" aria-labelledby="renk-teorisi-t">
+  <a class="link back" href="#">All articles <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a>
+  <header class="post-head">
+    <div class="row"><span class="cat"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Digital Design</span><time class="date label" datetime="2026-10-29">29 October 2026</time><span class="label">7 min read</span><span class="label">By: Yunus Emre Ersoy</span></div>
+    <h1 id="renk-teorisi-t">Color Theory in Adobe Photoshop and Digital Design</h1>
+    <div class="row"><span class="label">Tags</span><ul class="tags"><li><button type="button" class="tag" data-key="#Photoshop">#Photoshop</button></li><li><button type="button" class="tag" data-key="#ColorTheory">#ColorTheory</button></li><li><button type="button" class="tag" data-key="#GraphicDesign">#GraphicDesign</button></li><li><button type="button" class="tag" data-key="#Poster">#Poster</button></li></ul></div>
+  </header>
+  <div class="article glass"><p>Much of what makes a design feel “right” or “wrong” at first glance is colour. It was also what I spent the most time on in my Photoshop work: the charcoal colorization, the black-and-white contrast piece and the product poster. In this article I summarise the basics of colour theory and practical ways to apply them in Photoshop.</p>
+
+<h2>The colour wheel and three properties</h2>
+<p>In digital design it helps to think of a colour through three properties. The <strong>HSB</strong> model in Photoshop's colour picker shows exactly that:</p>
+<ul>
+  <li><strong>Hue:</strong> the colour itself, red, yellow, blue… expressed as its angle on the wheel.</li>
+  <li><strong>Saturation:</strong> how vivid or grey the colour is.</li>
+  <li><strong>Brightness:</strong> how light or dark it is.</li>
+</ul>
+<p>On screen, colours are defined in <strong>RGB</strong>; for print, in <strong>CMYK</strong>. Checking the colour mode before sending a poster to print prevents a colour that glows on screen from coming out dull on paper.</p>
+
+<h2>Harmony schemes</h2>
+<ul>
+  <li><strong>Complementary:</strong> colours opposite each other on the wheel (like blue and orange). The strongest contrast, ideal for emphasis.</li>
+  <li><strong>Analogous:</strong> neighbouring colours (yellow, orange, red). Calm and unified.</li>
+  <li><strong>Triadic:</strong> three evenly spaced colours. Energetic but hard to balance.</li>
+  <li><strong>Monochromatic:</strong> lighter and darker values of one hue. A safe choice for minimal, elegant designs.</li>
+</ul>
+
+<h2>The 60-30-10 rule</h2>
+<p>A simple rule for distributing colour weight: about 60% of the area is the dominant colour, 30% the secondary colour and 10% the accent. In my product poster, the yellow background was dominant, the white tube secondary and the orange SPF label the accent, so the eye goes to the product first and then to the slogan.</p>
+
+<h2>Ways to control colour in Photoshop</h2>
+<ul>
+  <li><strong>Adjustment layers:</strong> Hue/Saturation, Color Balance and Curves change colour without destroying the original pixels. If you don't like the result, just delete the layer.</li>
+  <li><strong>Blend modes:</strong> when colorizing a charcoal drawing, painting colour on a separate layer set to <em>Color</em> or <em>Soft Light</em> keeps the lines and shading intact.</li>
+  <li><strong>Selective colour:</strong> turn the image grey with a Black &amp; White adjustment layer, then erase the area you want in its mask, and that region stays in colour. That's how I made the player stand out in my black-and-white contrast project.</li>
+  <li><strong>Gradient Map:</strong> maps the light and dark tones of a photo to colours you choose, creating a consistent mood.</li>
+  <li><strong>Saved palettes:</strong> extracting a palette from a photo with a tool like Adobe Color and saving it to the Swatches panel keeps the same colours across the whole design.</li>
+</ul>
+
+<h2>Colour psychology and accessibility</h2>
+<p>Colours carry associations: yellow speaks of energy and sunshine, blue of trust and calm, red of passion and urgency. But readability comes before association. Without enough contrast between text and background, even the most beautiful palette fails. On the web, a contrast ratio of at least <strong>4.5:1</strong> is recommended for normal text. Conveying information through shape or text as well as colour also means thinking about colour-blind users.</p>
+
+<blockquote>A good palette has few colours, and every colour has a job.</blockquote>
+
+<h2>Conclusion</h2>
+<p>Colour theory is less about memorising rules and more about making deliberate choices. Deciding the dominant, secondary and accent colours before you start, and making changes non-destructively with adjustment layers in Photoshop, saves time and makes the result look more professional.</p></div>
+  <footer class="post-foot"><span class="label">Category: Digital Design</span><a class="link" href="#">Back to all articles <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></footer>
+</article>
+<article class="post wrap" id="responsive-tasarim" aria-labelledby="responsive-tasarim-t">
+  <a class="link back" href="#">All articles <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a>
+  <header class="post-head">
+    <div class="row"><span class="cat"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Web Development</span><time class="date label" datetime="2026-10-08">8 October 2026</time><span class="label">8 min read</span><span class="label">By: Yunus Emre Ersoy</span></div>
+    <h1 id="responsive-tasarim-t">Principles of Responsive Design in Modern Web Development</h1>
+    <div class="row"><span class="label">Tags</span><ul class="tags"><li><button type="button" class="tag" data-key="#Responsive">#Responsive</button></li><li><button type="button" class="tag" data-key="#CSS">#CSS</button></li><li><button type="button" class="tag" data-key="#MobileFirst">#MobileFirst</button></li><li><button type="button" class="tag" data-key="#Accessibility">#Accessibility</button></li></ul></div>
+  </header>
+  <div class="article glass"><p>Today most visitors reach a website from a phone. The same page has to read comfortably on a 360-pixel screen and on a 1920-pixel monitor. Responsive design is how a single codebase adapts to every screen. Below are the principles I applied while redesigning this portfolio site.</p>
+
+<h2>1. Start with the viewport tag</h2>
+<p>Without this line, mobile browsers render the page at desktop width and shrink it:</p>
+<p><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></p>
+
+<h2>2. Think mobile-first</h2>
+<p>Designing for the smallest screen first and adding features as it grows is easier than the reverse. A small screen forces you to decide what really matters. In CSS, that means writing the base styles and adding <code>@media (min-width: …)</code> blocks for larger screens.</p>
+
+<h2>3. Fluid grids: Grid and Flexbox</h2>
+<p>Work with proportions instead of fixed pixel widths. This line of CSS Grid adjusts the number of columns to the screen width on its own:</p>
+<p><code>grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));</code></p>
+<p>Flexbox, with <code>flex-wrap: wrap</code>, moves items that don't fit to the next line. In many cases you don't even need a media query.</p>
+
+<h2>4. Fluid type with clamp()</h2>
+<p>To keep headings proportional on every screen, <code>clamp()</code> is very handy:</p>
+<p><code>font-size: clamp(2rem, 5vw, 4rem);</code></p>
+<p>This keeps the text at least 2rem and at most 4rem, growing with the screen width in between. For body text, keeping lines around 65–75 characters long makes reading easier.</p>
+
+<h2>5. Let content set the breakpoints</h2>
+<p>Place breakpoints where the design starts to break, not at device sizes like “iPhone width” or “tablet width”. Slowly narrow the browser window; the moment the layout gets cramped is the time to add a media query.</p>
+
+<h2>6. Responsive images</h2>
+<ul>
+  <li><code>img { max-width: 100%; height: auto; }</code> stops images from overflowing.</li>
+  <li><code>aspect-ratio</code> and <code>object-fit: cover</code> crop photos of different sizes neatly into the same frame.</li>
+  <li>Setting <code>width</code> and <code>height</code> attributes prevents the page from jumping while images load.</li>
+  <li><code>loading="lazy"</code> delays images below the fold until they're needed.</li>
+  <li><code>srcset</code> sends smaller files to small screens and saves data.</li>
+</ul>
+
+<h2>7. Don't forget touch and accessibility</h2>
+<p>Phones have no mouse; buttons and links should be big enough to tap comfortably, about 44×44 pixels. For keyboard users the focus outline must stay visible, and text must have enough contrast against its background.</p>
+
+<blockquote>Responsive design isn't a feature, it's a requirement: visitors don't ask which device you'd like them to use.</blockquote>
+
+<h2>8. Test on real devices</h2>
+<p>The device view in the browser's developer tools is a good start, but always open the page on a real phone too. Text size, tap targets and the feel of scrolling only become clear that way.</p>
+
+<h2>Conclusion</h2>
+<p>Fluid grids, type that scales with <code>clamp()</code>, breakpoints that come from the content and responsive images together make a site feel natural on every screen. This site's side menu turning into a top bar on phones and its cards dropping to a single column are results of the same principles.</p></div>
+  <footer class="post-foot"><span class="label">Category: Web Development</span><a class="link" href="#">Back to all articles <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a></footer>
+</article></div>
+</div>
+</main>
+<footer class="foot">
+  <div class="marquee thin" aria-hidden="true"><div class="mq-track"><div class="mq-group"><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Python</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Artificial Intelligence</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Photoshop</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>HTML · CSS</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>JavaScript</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Visual Design</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Charcoal</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Smart Object</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Akdeniz University</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Antalya</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Python</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Artificial Intelligence</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Photoshop</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>HTML · CSS</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>JavaScript</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Visual Design</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Charcoal</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Smart Object</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Akdeniz University</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Antalya</span></span></div><div class="mq-group"><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Python</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Artificial Intelligence</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Photoshop</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>HTML · CSS</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>JavaScript</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Visual Design</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Charcoal</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Smart Object</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Akdeniz University</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Antalya</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Python</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Artificial Intelligence</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Photoshop</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>HTML · CSS</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>JavaScript</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Visual Design</span></span><span class="mq-item"><svg class="mq-ic mq-ring" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 5 18 16H6Z"/></svg><span>Charcoal</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg><span>Smart Object</span></span><span class="mq-item"><svg class="mq-ic" viewBox="0 0 24 24"><path d="M12 1c.8 5.6 5.4 10.2 11 11-5.6.8-10.2 5.4-11 11-.8-5.6-5.4-10.2-11-11C6.6 11.2 11.2 6.6 12 1Z"/></svg><span>Akdeniz University</span></span><span class="mq-item"><svg class="u mq-ic" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span>Antalya</span></span></div></div></div>
+  <div class="foot-mark" aria-hidden="true">Yunus Emre Ersoy</div>
+  <div class="foot-inner">
+    <div>
+      <h2>Yunus Emre Ersoy</h2>
+      <p>Computer Programming student at Akdeniz University. Python, AI and visual design.</p>
+      <div class="social-row"><a class="sq" href="https://www.instagram.com/e.mre0_0/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.3-4.1a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6Z"/></svg></a><a class="sq" href="https://www.linkedin.com/in/yunus-emre-ersoy-2a3b2638a/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM2.5 9h3v12h-3zM9 9h2.9v1.7c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4.5 2.3 4.5 5.4V21h-3v-6c0-1.5-.3-3.1-2.2-3.1S12 13.3 12 15v6H9z"/></svg></a></div>
+    </div>
+    <div><h3>Plates</h3><ul class="cols2"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="projects.html">Projects</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><h3>Contact</h3><ul><li><a href="mailto:yeersoy.0715@gmail.com">yeersoy.0715@gmail.com</a></li><li><a href="tel:+905447391507">+90 544 739 15 07</a></li><li>Antalya / Burdur, Türkiye</li></ul></div>
+  </div>
+  <div class="foot-base"><span>© 2026 Yunus Emre Ersoy · All rights reserved</span><span>Midterm project · Akdeniz University</span><a class="admin-link" href="admin.html" rel="nofollow">Admin</a></div>
+</footer>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/cms.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

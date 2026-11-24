@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yönetim Paneli · Yunus Emre Ersoy</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#07080d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%2310131c' d='M16 1 31 16 16 31 1 16Z'/%3E%3Cpath fill='%23ff6b6b' d='M16 9l7 7-7 7-7-7Z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body data-page="admin">
+<a class="skip" href="#main">İçeriğe geç</a>
+<div class="fx-layer" aria-hidden="true">
+  <span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span>
+  <canvas id="net"></canvas>
+  <span class="grid-tex"></span><span class="grain"></span>
+</div>
+<div class="cursor-glow" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+<header class="navbar">
+  <a class="brand" href="anasayfa.html"><svg class="mono-mark" viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="ye-mg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6b6b"/><stop offset=".55" stop-color="#ffb86b"/><stop offset="1" stop-color="#9d8cff"/></linearGradient></defs><path fill="url(#ye-mg)" fill-rule="evenodd" d="M32 1 63 32 32 63 1 32Zm0 6L7 32l25 25 25-25Z"/><path fill="#10131c" stroke="url(#ye-mg)" stroke-width="1.5" d="M32 12 52 32 32 52 12 32Z"/><text x="32" y="37.5" text-anchor="middle" font-family="Tektur, sans-serif" font-weight="800" font-size="14" fill="#f4f1ff" letter-spacing=".5">YE</text></svg><span class="brand-name">Yunus Emre<small> Ersoy</small></span></a>
+  <span class="label adm-badge"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Yönetim paneli</span>
+  <div class="nav-tools">
+    <a class="link" href="anasayfa.html">Siteye dön <svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></a>
+    <button class="adm-btn ghost" type="button" data-logout hidden>Çıkış</button>
+  </div>
+</header>
+<main id="main" class="wrap admin">
+
+<section class="adm-login glass panel" id="login" aria-labelledby="login-title">
+  <span class="bg-icon" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="36" r="18"/><path d="M14 94c4-20 18-32 36-32s32 12 36 32"/><path d="M50 4 54 10 50 16 46 10Z"/></svg></span><span class="bg-pattern" aria-hidden="true"></span><span class="glare" aria-hidden="true"></span>
+  <p class="kicker"><span class="dot"></span>İçerik yönetimi</p>
+  <h1 id="login-title" class="h-section"><span class="grad-text">Giriş</span></h1>
+  <form class="form adm-login-form" id="login-form" novalidate>
+    <div class="field full"><label for="l-user">Kullanıcı adı</label><input id="l-user" name="user" type="text" autocomplete="username" autocapitalize="off" spellcheck="false" required></div>
+    <div class="field full"><label for="l-pass">Şifre</label><input id="l-pass" name="pass" type="password" autocomplete="current-password" required></div>
+    <div class="form-foot"><button class="btn" type="submit"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Giriş yap<svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></button><p class="status bad" role="status" data-login-msg></p></div>
+  </form>
+  <p class="adm-note">Bu giriş yalnızca bu tarayıcıda çalışan basit bir kilittir; gerçek bir güvenlik katmanı değildir. Şifre sayfada açık metin olarak değil, SHA-256 özeti olarak tutulur. Arka arkaya 5 hatalı denemede giriş 30 saniye kilitlenir.</p>
+</section>
+
+<section class="adm-panel" id="panel" hidden aria-labelledby="panel-title">
+  <header class="adm-head">
+    <div>
+      <p class="kicker"><span class="dot"></span>Yönetim paneli</p>
+      <h1 id="panel-title" class="h-section"><span class="grad-text">İçerik yönetimi</span></h1>
+      <p class="adm-status" data-status aria-live="polite"></p>
+    </div>
+    <div class="adm-tools">
+      <button class="btn" type="button" data-save><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg>Kaydet<svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></button>
+      <button class="adm-btn" type="button" data-export-json>JSON olarak dışa aktar</button>
+      <button class="adm-btn" type="button" data-export-js>data.js olarak indir</button>
+      <label class="adm-btn" for="import-file">JSON içe aktar</label><input class="sr-only" type="file" id="import-file" accept="application/json,.json">
+      <button class="adm-btn danger" type="button" data-reset>Varsayılanlara sıfırla</button>
+    </div>
+  </header>
+
+  <h2 class="sr-only">Özet</h2>
+  <div class="adm-stats">
+    <div class="adm-stat glass" data-stat="projects"><span class="adm-stat-ic"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M9 9h14v14H9z"/><path d="M16 5.5 26.5 16 16 26.5 5.5 16Z"/><path class="a" d="M16 12l4 4-4 4-4-4Z"/></svg></span><b data-stat-n>0</b><span class="adm-stat-l">Proje</span><small data-stat-sub></small></div>
+    <div class="adm-stat glass" data-stat="blog"><span class="adm-stat-ic"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 4 28 16 16 28 4 16Zm0 6-6 6 6 6 6-6Z"/><path d="M13 1h6v3h-3v2h-3zM19 31h-6v-3h3v-2h3zM1 19v-6h3v3h2v3zM31 13v6h-3v-3h-2v-3z"/><path class="a" d="M16 13l3 3-3 3-3-3Z"/></svg></span><b data-stat-n>0</b><span class="adm-stat-l">Blog yazısı</span><small data-stat-sub></small></div>
+    <div class="adm-stat glass" data-stat="gallery"><span class="adm-stat-ic"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M3 3h17v17H3Zm4 4v9h9V7Z"/><path fill-rule="evenodd" d="M12 12h17v17H12Zm4 4v9h9v-9Z"/><path class="a" d="M12 12h4v4h-4z"/></svg></span><b data-stat-n>0</b><span class="adm-stat-l">Galeri fotoğrafı</span><small data-stat-sub></small></div>
+    <button type="button" class="adm-stat glass is-btn" data-stat="inbox" data-goto="tab-inbox"><span class="adm-stat-ic"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M14 2h4v4h-4zM9 7h4v4H9zM19 7h4v4h-4zM4 12h4v4H4zM24 12h4v4h-4zM9 17h4v4H9zM19 17h4v4h-4zM14 22h4v4h-4zM4 16h4v4H4zM24 16h4v4h-4z"/><path class="a" d="M14 12h4v8h-4z"/></svg></span><b data-stat-n>0</b><span class="adm-stat-l">Okunmamış mesaj</span><small data-stat-sub></small></button>
+  </div>
+
+  <div class="adm-tabs" role="tablist" aria-label="Yönetim bölümleri">
+    <button type="button" role="tab" id="tab-projects" aria-controls="pane-projects" aria-selected="true">Projeler <span data-count-of="projects"></span></button>
+    <button type="button" role="tab" id="tab-blog" aria-controls="pane-blog" aria-selected="false" tabindex="-1">Blog <span data-count-of="blog"></span></button>
+    <button type="button" role="tab" id="tab-gallery" aria-controls="pane-gallery" aria-selected="false" tabindex="-1">Galeri <span data-count-of="gallery"></span></button>
+    <button type="button" role="tab" id="tab-profile" aria-controls="pane-profile" aria-selected="false" tabindex="-1">Hakkımda / Profil</button>
+    <button type="button" role="tab" id="tab-inbox" aria-controls="pane-inbox" aria-selected="false" tabindex="-1">Gelen mesajlar <span class="adm-pill" data-unread hidden></span></button>
+  </div>
+
+  <div class="adm-pane" role="tabpanel" id="pane-projects" aria-labelledby="tab-projects">
+    <div class="adm-list glass panel"><div class="adm-list-head"><h2 class="h-sub">Mevcut projeler</h2></div><div class="adm-search"><label class="sr-only" for="s-projects">Projelerde ara…</label><input id="s-projects" type="search" data-search="projects" placeholder="Projelerde ara…" autocomplete="off"><span class="adm-search-n" data-search-count="projects" aria-live="polite"></span></div><ol class="adm-items" data-list="projects"></ol></div>
+    <form class="adm-form glass panel form" data-form="projects" novalidate>
+      <h2 class="h-sub full" data-form-title data-add-title="Yeni proje ekle" data-edit-title="Projeyi düzenle">Yeni proje ekle</h2>
+      <div class="field"><label for="p-title-tr">Başlık (TR) *</label><input id="p-title-tr" name="titleTr" type="text" required></div>
+      <div class="field"><label for="p-title-en">Başlık (EN)</label><input id="p-title-en" name="titleEn" type="text" ></div>
+      <div class="field full"><label for="p-desc-tr">Açıklama (TR) *</label><textarea id="p-desc-tr" name="descTr" rows="3" required></textarea></div>
+      <div class="field full"><label for="p-desc-en">Açıklama (EN)</label><textarea id="p-desc-en" name="descEn" rows="3" ></textarea></div>
+      <div class="field"><label for="p-cat">Kategori</label><select id="p-cat" name="cat"><option value="design">Tasarım</option><option value="code">Yazılım</option></select></div>
+      <div class="field"><label for="p-tools">Kullanılan araçlar</label><input id="p-tools" name="tools" type="text" placeholder="Adobe Photoshop, Python…"></div>
+      <div class="field full"><label for="p-img">Görsel bağlantısı (URL veya assets/… yolu) *</label><input id="p-img" name="img" type="text" required inputmode="url" placeholder="https://… ya da assets/img/projects/…" data-preview="p-prev"></div>
+      <div class="adm-preview full" id="p-prev" hidden><span></span></div>
+      <div class="field"><label for="p-alt-tr">Görsel açıklaması / alt (TR)</label><input id="p-alt-tr" name="altTr" type="text" ></div>
+      <div class="field"><label for="p-alt-en">Görsel açıklaması / alt (EN)</label><input id="p-alt-en" name="altEn" type="text" ></div>
+      <label class="adm-check full"><input type="checkbox" name="featured"> Anasayfada öne çıkar</label>
+      <div class="form-foot"><button class="btn" type="submit"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span data-submit-label>Projeyi ekle</span><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></button><button class="adm-btn ghost" type="button" data-cancel hidden>Vazgeç</button><p class="status" role="status"></p></div>
+    </form>
+  </div>
+
+  <div class="adm-pane" role="tabpanel" id="pane-blog" aria-labelledby="tab-blog" hidden>
+    <div class="adm-list glass panel"><div class="adm-list-head"><h2 class="h-sub">Mevcut yazılar</h2></div><div class="adm-search"><label class="sr-only" for="s-blog">Yazılarda ara (başlık, kategori, etiket)…</label><input id="s-blog" type="search" data-search="blog" placeholder="Yazılarda ara (başlık, kategori, etiket)…" autocomplete="off"><span class="adm-search-n" data-search-count="blog" aria-live="polite"></span></div><ol class="adm-items" data-list="blog"></ol></div>
+    <form class="adm-form glass panel form" data-form="blog" novalidate>
+      <h2 class="h-sub full" data-form-title data-add-title="Yeni blog yazısı" data-edit-title="Yazıyı düzenle">Yeni blog yazısı</h2>
+      <div class="field"><label for="b-title-tr">Başlık (TR) *</label><input id="b-title-tr" name="titleTr" type="text" required></div>
+      <div class="field"><label for="b-title-en">Başlık (EN)</label><input id="b-title-en" name="titleEn" type="text" ></div>
+      <div class="field"><label for="b-cat-tr">Kategori (TR) *</label><input id="b-cat-tr" name="catTr" type="text" required placeholder="Yazılım Geliştirme"></div>
+      <div class="field"><label for="b-cat-en">Kategori (EN)</label><input id="b-cat-en" name="catEn" type="text" placeholder="Software Development"></div>
+      <div class="field"><label for="b-tags-tr">Etiketler (TR, virgülle) *</label><input id="b-tags-tr" name="tagsTr" type="text" required placeholder="Python, YapayZeka"></div>
+      <div class="field"><label for="b-tags-en">Etiketler (EN, virgülle)</label><input id="b-tags-en" name="tagsEn" type="text" placeholder="Python, AI"></div>
+      <div class="field full"><label for="b-ex-tr">Özet (TR) *</label><textarea id="b-ex-tr" name="excerptTr" rows="2" required></textarea></div>
+      <div class="field full"><label for="b-ex-en">Özet (EN)</label><textarea id="b-ex-en" name="excerptEn" rows="2" ></textarea></div>
+      <div class="field full"><label for="b-body-tr">İçerik (TR) *</label><textarea id="b-body-tr" name="bodyTr" rows="10" required></textarea></div>
+      <div class="field full"><label for="b-body-en">İçerik (EN)</label><textarea id="b-body-en" name="bodyEn" rows="10" ></textarea></div>
+      <p class="adm-hint full">Paragrafları boş satırla ayırın. <code>## Başlık</code> ara başlık, <code>- madde</code> liste, <code>1. madde</code> numaralı liste, <code>&gt; alıntı</code> alıntı, <code>**kalın**</code> ve <code>`kod`</code> desteklenir. HTML ile başlayan içerik güvenli etiketlere süzülerek olduğu gibi kullanılır.</p>
+      <div class="field"><label for="b-date">Tarih</label><input id="b-date" name="date" type="date"></div>
+      <div class="field"><label for="b-unit">Kart ikonu</label><select id="b-unit" name="unit"><option value="diamond">diamond</option><option value="eye">eye</option><option value="star">star</option><option value="knot">knot</option><option value="hook">hook</option><option value="cross">cross</option></select></div>
+      <div class="form-foot"><button class="btn" type="submit"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span data-submit-label>Yazıyı yayınla</span><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></button><button class="adm-btn ghost" type="button" data-cancel hidden>Vazgeç</button><p class="status" role="status"></p></div>
+    </form>
+  </div>
+
+  <div class="adm-pane" role="tabpanel" id="pane-gallery" aria-labelledby="tab-gallery" hidden>
+    <div class="adm-list glass panel"><div class="adm-list-head"><h2 class="h-sub">Galerideki fotoğraflar</h2></div><div class="adm-search"><label class="sr-only" for="s-gallery">Fotoğraflarda ara…</label><input id="s-gallery" type="search" data-search="gallery" placeholder="Fotoğraflarda ara…" autocomplete="off"><span class="adm-search-n" data-search-count="gallery" aria-live="polite"></span></div><ol class="adm-items" data-list="gallery"></ol></div>
+    <form class="adm-form glass panel form" data-form="gallery" novalidate>
+      <h2 class="h-sub full" data-form-title data-add-title="Galeriye fotoğraf ekle" data-edit-title="Fotoğrafı düzenle">Galeriye fotoğraf ekle</h2>
+      <div class="field full"><label for="g-img">Fotoğraf bağlantısı (URL veya assets/… yolu) *</label><input id="g-img" name="img" type="text" required inputmode="url" placeholder="https://… ya da assets/img/gallery/…" data-preview="g-prev"></div>
+      <div class="adm-preview full" id="g-prev" hidden><span></span></div>
+      <div class="field"><label for="g-title-tr">Başlık (TR) *</label><input id="g-title-tr" name="titleTr" type="text" required></div>
+      <div class="field"><label for="g-title-en">Başlık (EN)</label><input id="g-title-en" name="titleEn" type="text" ></div>
+      <div class="field full"><label for="g-cap-tr">Açıklama (TR) *</label><textarea id="g-cap-tr" name="captionTr" rows="2" required></textarea></div>
+      <div class="field full"><label for="g-cap-en">Açıklama (EN)</label><textarea id="g-cap-en" name="captionEn" rows="2" ></textarea></div>
+      <div class="field"><label for="g-tag-tr">Etiket (TR)</label><input id="g-tag-tr" name="tagTr" type="text" placeholder="Aile, Futbol…"></div>
+      <div class="field"><label for="g-tag-en">Etiket (EN)</label><input id="g-tag-en" name="tagEn" type="text" placeholder="Family, Football…"></div>
+      <div class="field"><label for="g-alt-tr">Alternatif metin (TR)</label><input id="g-alt-tr" name="altTr" type="text" ></div>
+      <div class="field"><label for="g-alt-en">Alternatif metin (EN)</label><input id="g-alt-en" name="altEn" type="text" ></div>
+      <div class="form-foot"><button class="btn" type="submit"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span data-submit-label>Fotoğrafı ekle</span><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></button><button class="adm-btn ghost" type="button" data-cancel hidden>Vazgeç</button><p class="status" role="status"></p></div>
+    </form>
+  </div>
+
+  <div class="adm-pane adm-pane-wide" role="tabpanel" id="pane-profile" aria-labelledby="tab-profile" hidden>
+    <form class="adm-form glass panel form" data-form="profile" novalidate>
+      <h2 class="h-sub full">Hakkımda yazısı</h2>
+      <div class="field"><label for="pr-sum-tr">Kısa özet · anasayfa (TR) *</label><textarea id="pr-sum-tr" name="summaryTr" rows="2" required></textarea></div>
+      <div class="field"><label for="pr-sum-en">Kısa özet · anasayfa (EN)</label><textarea id="pr-sum-en" name="summaryEn" rows="2" ></textarea></div>
+      <div class="field"><label for="pr-bio-tr">Hakkımda metni (TR, paragrafları boş satırla ayırın) *</label><textarea id="pr-bio-tr" name="bioTr" rows="9" required></textarea></div>
+      <div class="field"><label for="pr-bio-en">Hakkımda metni (EN)</label><textarea id="pr-bio-en" name="bioEn" rows="9" ></textarea></div>
+
+      <h2 class="h-sub full adm-sub">İletişim ve konum</h2>
+      <div class="field"><label for="pr-loc-tr">Konum (TR) *</label><input id="pr-loc-tr" name="locTr" type="text" required></div>
+      <div class="field"><label for="pr-loc-en">Konum (EN)</label><input id="pr-loc-en" name="locEn" type="text" ></div>
+      <div class="field"><label for="pr-map">Harita konumu (Google Maps araması) *</label><input id="pr-map" name="mapQuery" type="text" required placeholder="Kepez, Antalya, Türkiye"></div>
+      <div class="field"><label for="pr-mail">E-posta *</label><input id="pr-mail" name="email" type="email" required></div>
+      <div class="field"><label for="pr-ph1">Telefon 1</label><input id="pr-ph1" name="phone1" type="tel"></div>
+      <div class="field"><label for="pr-ph2">Telefon 2</label><input id="pr-ph2" name="phone2" type="tel"></div>
+      <div class="field"><label for="pr-ig">Instagram bağlantısı</label><input id="pr-ig" name="instagram" type="url" placeholder="https://www.instagram.com/…"></div>
+      <div class="field"><label for="pr-li">LinkedIn bağlantısı</label><input id="pr-li" name="linkedin" type="url" placeholder="https://www.linkedin.com/in/…"></div>
+
+      <div class="full adm-skills-head"><h2 class="h-sub adm-sub">Yetenekler</h2><button class="adm-btn" type="button" data-add-skill>+ Yetenek ekle</button></div>
+      <div class="full adm-skills" data-skills></div>
+      <div class="form-foot"><button class="btn" type="submit"><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg><span data-submit-label>Profili uygula</span><svg class="u" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M16 1 31 16 16 31 1 16Zm0 6L7 16l9 9 9-9Z"/><path class="a" d="M16 11l5 5-5 5-5-5Z"/></svg></button><button class="adm-btn ghost" type="button" data-cancel hidden>Vazgeç</button><p class="status" role="status"></p></div>
+    </form>
+  </div>
+
+  <div class="adm-pane adm-pane-wide" role="tabpanel" id="pane-inbox" aria-labelledby="tab-inbox" hidden>
+    <div class="adm-list glass panel">
+      <div class="adm-list-head"><h2 class="h-sub">Gelen mesajlar</h2>
+        <div class="adm-inbox-tools"><button class="adm-btn ghost" type="button" data-inbox-readall>Tümünü okundu işaretle</button><button class="adm-btn ghost danger" type="button" data-inbox-clear>Tümünü sil</button></div>
+      </div>
+      <div class="adm-search"><label class="sr-only" for="s-inbox">Mesajlarda ara (ad, e-posta, konu)…</label><input id="s-inbox" type="search" data-search="inbox" placeholder="Mesajlarda ara (ad, e-posta, konu)…" autocomplete="off"><span class="adm-search-n" data-search-count="inbox" aria-live="polite"></span></div>
+      <ol class="adm-items adm-inbox" data-list="inbox"></ol>
+      <p class="adm-note">Mesajlar iletişim sayfasındaki formdan gelir ve bu tarayıcının hafızasında saklanır; mesaj işlemleri anında kaydedilir.</p>
+    </div>
+  </div>
+
+  <p class="adm-note">İçerik değişiklikleri yalnızca <strong>bu tarayıcıda</strong> görünür. Herkesin görmesi için “data.js olarak indir” ile aldığınız dosyayı projedeki <code>assets/js/data.js</code> dosyasının yerine koyup <code>node tools/build.mjs .</code> komutunu çalıştırın ve siteyi yeniden yayınlayın.</p>
+</section>
+</main>
+<div class="adm-toast" role="status" aria-live="polite" hidden></div>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/cms.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
