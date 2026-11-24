@@ -34,7 +34,7 @@
   /* Project filters */
   var pf = document.querySelector("[data-filter-group='projects']");
   if (pf) {
-    var units = document.querySelectorAll(".grid-units .unit");
+    var units = document.querySelectorAll(".grid-units .work-card");
     var countEl = document.querySelector("[data-project-count]");
     pf.addEventListener("click", function (e) {
       var b = e.target.closest("button");
@@ -42,8 +42,6 @@
       pf.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
       var f = b.getAttribute("data-filter");
       var n = 0;
-      var grid = document.querySelector(".grid-units");
-      if (grid) grid.classList.toggle("is-filtered", f !== "all");
       units.forEach(function (u) {
         var show = f === "all" || u.getAttribute("data-cat") === f;
         u.hidden = !show;
@@ -149,8 +147,8 @@
   var form = document.getElementById("contact-form");
   if (form) {
     var msgs = {
-      tr: { req: "Bu alan boş bırakılamaz.", mail: "Geçerli bir e-posta adresi yazın (ör. ad@ornek.com).", short: "Mesaj en az 10 karakter olmalı.", ok: "E-posta uygulamanız açılıyor. Mesaj hazır, yalnızca “Gönder” e basın.", saved: "Teşekkürler, mesajınız kaydedildi. E-posta uygulamanız da hazır mesajla açılıyor.", bad: "Lütfen işaretli alanları düzeltin." },
-      en: { req: "This field can't be empty.", mail: "Enter a valid email address (e.g. name@example.com).", short: "The message needs at least 10 characters.", ok: "Your email app is opening with the message ready. Just press “Send”.", saved: "Thank you, your message has been saved. Your email app is also opening with it ready.", bad: "Please fix the highlighted fields." }
+      tr: { req: "Bu alan boş bırakılamaz.", mail: "Geçerli bir e-posta adresi yazın (ör. ad@ornek.com).", short: "Mesaj en az 10 karakter olmalı.", ok: "Mesajınız e-posta uygulamanızda hazır.", saved: "Teşekkürler, mesajınız alındı ve e-posta uygulamanızda hazır.", bad: "Lütfen işaretli alanları düzeltin." },
+      en: { req: "This field can't be empty.", mail: "Enter a valid email address (e.g. name@example.com).", short: "The message needs at least 10 characters.", ok: "Your message is ready in your email app.", saved: "Thank you, your message was received and is ready in your email app.", bad: "Please fix the highlighted fields." }
     }[lang];
     var status = form.querySelector(".status");
     var check = function (field) {
@@ -206,81 +204,154 @@
   document.addEventListener("pointerleave", function () { pointer.on = false; });
   document.documentElement.addEventListener("mouseleave", function () { pointer.on = false; });
 
-  /* 1. Interactive constellation network (background canvas) */
-(function () {
+  /* 1. Interactive constellation (background canvas)
+        Stars sit on a jittered grid and are wired once to their nearest
+        neighbours, so edges persist and stretch instead of popping in/out.
+        Near the cursor a star is pulled toward it by a damped spring
+        (max ~30px, hard stop at 35px); its edges stretch with it and a weak
+        edge coupling lets neighbours follow a little. Pointer is read from
+        window (canvas layer is pointer-events:none), one rAF loop. */
+  (function () {
     var c = document.getElementById("net");
     if (!c || !c.getContext) return;
     var ctx = c.getContext("2d");
-    var W = 0, H = 0, nodes = [];
-    var LINK = 140, LINK2 = LINK * LINK, R = 190;
-    var make = function () {
-      return { x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3, r: Math.random() * 1.3 + .7, ox: 0, oy: 0, g: 0 };
+    var CFG = {
+      hoverRadius: 170,   /* px: cursor influence radius */
+      maxOffset: 30,      /* px: how far a star is pulled toward the cursor */
+      hardLimit: 35,      /* px: absolute cap from its home position */
+      stiffness: .075,    /* spring strength toward the target offset */
+      damping: .80,       /* velocity kept per frame (lower = calmer) */
+      coupling: .016,     /* how much an edge drags its neighbour along */
+      neighbours: 3,      /* edges per star (k nearest) */
+      linkMax: 170        /* px: no edge longer than this at rest */
+    };
+    var R2 = CFG.hoverRadius * CFG.hoverRadius;
+    var W = 0, H = 0, nodes = [], edges = [], last = 0;
+    var COOL = "165,175,235", WARM = "255,190,140";
+
+    var build = function () {
+      var cell = Math.max(96, Math.sqrt((W * H) / 150));
+      var cols = Math.ceil(W / cell) + 1, rows = Math.ceil(H / cell) + 1;
+      nodes = [];
+      for (var r = 0; r < rows; r++) for (var q = 0; q < cols; q++) {
+        if (Math.random() > .8) continue;
+        var hx = (q - .5 + .15 + Math.random() * .7) * cell, hy = (r - .5 + .15 + Math.random() * .7) * cell;
+        nodes.push({ hx: hx, hy: hy, x: hx, y: hy, ox: 0, oy: 0, vx: 0, vy: 0, g: 0,
+          r: Math.random() * 1.2 + .7, ph: Math.random() * 6.283, amp: 2 + Math.random() * 4, sp: .00018 + Math.random() * .00022 });
+      }
+      edges = [];
+      var seen = {}, i, j, list, dx, dy;
+      for (i = 0; i < nodes.length; i++) {
+        list = [];
+        for (j = 0; j < nodes.length; j++) {
+          if (i === j) continue;
+          dx = nodes[i].hx - nodes[j].hx; dy = nodes[i].hy - nodes[j].hy;
+          var d2 = dx * dx + dy * dy;
+          if (d2 < CFG.linkMax * CFG.linkMax) list.push([j, d2]);
+        }
+        list.sort(function (a, b) { return a[1] - b[1]; });
+        for (j = 0; j < Math.min(CFG.neighbours, list.length); j++) {
+          var a = Math.min(i, list[j][0]), b = Math.max(i, list[j][0]), key = a * 4096 + b;
+          if (seen[key]) continue;
+          seen[key] = 1;
+          edges.push({ a: nodes[a], b: nodes[b], rest: Math.sqrt(list[j][1]) });
+        }
+      }
     };
     var size = function () {
       var dpr = Math.min(window.devicePixelRatio || 1, 1.75);
       W = window.innerWidth; H = window.innerHeight;
       c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      var target = Math.round(Math.min(110, Math.max(26, (W * H) / 14000)));
-      if (W < 700) target = Math.min(target, 40);
-      while (nodes.length < target) nodes.push(make());
-      nodes.length = target;
+      build();
     };
-    var draw = function () {
-      ctx.clearRect(0, 0, W, H);
-      var i, j, n, m, dx, dy, d2, d, f, a;
-      var mx = pointer.x, my = pointer.y, act = pointer.on && fine;
+
+    var step = function (now, dt) {
+      var act = pointer.on && fine && !reduce, mx = pointer.x, my = pointer.y;
+      var i, n, e, dx, dy, d2, d, f, pull, tx, ty, kx, ky;
+      /* neighbour coupling: each edge nudges its two ends toward a shared offset */
+      for (i = 0; i < edges.length; i++) {
+        e = edges[i];
+        kx = (e.a.ox - e.b.ox) * CFG.coupling; ky = (e.a.oy - e.b.oy) * CFG.coupling;
+        e.a.vx -= kx * dt; e.a.vy -= ky * dt; e.b.vx += kx * dt; e.b.vy += ky * dt;
+      }
+      var keep = Math.pow(CFG.damping, dt);
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
-        if (!reduce) {
-          n.x += n.vx; n.y += n.vy;
-          if (n.x < -20) n.x = W + 20; else if (n.x > W + 20) n.x = -20;
-          if (n.y < -20) n.y = H + 20; else if (n.y > H + 20) n.y = -20;
+        /* home position with a slow idle drift */
+        var bx = n.hx, by = n.hy;
+        if (!reduce) { var t = now * n.sp + n.ph; bx += Math.cos(t) * n.amp; by += Math.sin(t * 1.3) * n.amp; }
+        tx = 0; ty = 0; f = 0;
+        if (act) {
+          dx = mx - bx; dy = my - by; d2 = dx * dx + dy * dy;
+          if (d2 < R2) {
+            d = Math.sqrt(d2) || 1;
+            f = 1 - d / CFG.hoverRadius; f = f * f * (3 - 2 * f);          /* smoothstep falloff */
+            pull = Math.min(d, CFG.maxOffset) * Math.max(f, d < CFG.maxOffset ? 1 : 0);
+            tx = (dx / d) * pull; ty = (dy / d) * pull;
+          }
         }
-        dx = n.x - mx; dy = n.y - my;
-        d = act ? Math.sqrt(dx * dx + dy * dy) : 1e9;
-        if (d < R) {
-          f = 1 - d / R;
-          n.g += (f - n.g) * .14;
-          n.ox += ((dx / (d || 1)) * f * 22 - n.ox) * .08;
-          n.oy += ((dy / (d || 1)) * f * 22 - n.oy) * .08;
-        } else { n.g *= .93; n.ox *= .94; n.oy *= .94; }
-        n.px = n.x + n.ox; n.py = n.y + n.oy;
+        /* damped spring toward the target offset (0,0 when the cursor is away) */
+        n.vx = (n.vx + (tx - n.ox) * CFG.stiffness * dt) * keep;
+        n.vy = (n.vy + (ty - n.oy) * CFG.stiffness * dt) * keep;
+        n.ox += n.vx * dt; n.oy += n.vy * dt;
+        d2 = n.ox * n.ox + n.oy * n.oy;
+        if (d2 > CFG.hardLimit * CFG.hardLimit) {
+          d = Math.sqrt(d2); n.ox *= CFG.hardLimit / d; n.oy *= CFG.hardLimit / d; n.vx *= .5; n.vy *= .5;
+        }
+        n.g += (f - n.g) * Math.min(1, .12 * dt);
+        n.x = bx + n.ox; n.y = by + n.oy;
+      }
+    };
+
+    var draw = function () {
+      ctx.clearRect(0, 0, W, H);
+      var i, e, a, dx, dy, len, heat, stretch;
+      ctx.lineWidth = 1;
+      /* resting edges: one batched path */
+      ctx.strokeStyle = "rgba(" + COOL + ",.11)";
+      ctx.beginPath();
+      for (i = 0; i < edges.length; i++) {
+        e = edges[i];
+        if (e.a.g > .03 || e.b.g > .03) continue;
+        ctx.moveTo(e.a.x, e.a.y); ctx.lineTo(e.b.x, e.b.y);
+      }
+      ctx.stroke();
+      /* active edges: brighten with proximity and with how far they are stretched */
+      for (i = 0; i < edges.length; i++) {
+        e = edges[i];
+        heat = Math.max(e.a.g, e.b.g);
+        if (heat <= .03) continue;
+        dx = e.a.x - e.b.x; dy = e.a.y - e.b.y; len = Math.sqrt(dx * dx + dy * dy);
+        stretch = Math.min(1, Math.abs(len - e.rest) / 30);
+        a = .11 + heat * .38 + stretch * .18;
+        ctx.strokeStyle = "rgba(" + WARM + "," + a.toFixed(3) + ")";
+        ctx.lineWidth = 1 + stretch * .4;
+        ctx.beginPath(); ctx.moveTo(e.a.x, e.a.y); ctx.lineTo(e.b.x, e.b.y); ctx.stroke();
       }
       ctx.lineWidth = 1;
       for (i = 0; i < nodes.length; i++) {
-        n = nodes[i];
-        for (j = i + 1; j < nodes.length; j++) {
-          m = nodes[j];
-          dx = n.px - m.px; if (dx > LINK || dx < -LINK) continue;
-          dy = n.py - m.py; if (dy > LINK || dy < -LINK) continue;
-          d2 = dx * dx + dy * dy; if (d2 > LINK2) continue;
-          f = 1 - Math.sqrt(d2) / LINK;
-          var glow = (n.g + m.g) * .5;
-          a = f * (.13 + glow * .55);
-          ctx.strokeStyle = glow > .04 ? "rgba(255,190,140," + a.toFixed(3) + ")" : "rgba(165,175,235," + a.toFixed(3) + ")";
-          ctx.beginPath(); ctx.moveTo(n.px, n.py); ctx.lineTo(m.px, m.py); ctx.stroke();
-        }
-        if (n.g > .05) {
-          ctx.strokeStyle = "rgba(255,184,107," + (n.g * .32).toFixed(3) + ")";
-          ctx.beginPath(); ctx.moveTo(n.px, n.py); ctx.lineTo(mx, my); ctx.stroke();
-        }
-      }
-      for (i = 0; i < nodes.length; i++) {
-        n = nodes[i];
+        var n = nodes[i];
         if (n.g > .05) {
           ctx.fillStyle = "rgba(255,170,110," + (n.g * .18).toFixed(3) + ")";
-          ctx.beginPath(); ctx.arc(n.px, n.py, n.r + 3 + n.g * 7, 0, 6.283); ctx.fill();
+          ctx.beginPath(); ctx.arc(n.x, n.y, n.r + 3 + n.g * 6, 0, 6.283); ctx.fill();
           ctx.fillStyle = "rgba(255,226,196," + (.55 + n.g * .45).toFixed(3) + ")";
         } else ctx.fillStyle = "rgba(215,220,255,.5)";
-        ctx.beginPath(); ctx.arc(n.px, n.py, n.r + n.g * 1.6, 0, 6.283); ctx.fill();
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r + n.g * 1.4, 0, 6.283); ctx.fill();
       }
     };
-    var loop = function () { draw(); requestAnimationFrame(loop); };
-    var t;
-    window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(function () { size(); if (reduce) draw(); }, 120); });
+
+    var loop = function (now) {
+      var dt = last ? Math.min(3, (now - last) / 16.667) : 1; /* frame-rate independent */
+      last = now;
+      step(now, dt); draw();
+      requestAnimationFrame(loop);
+    };
+    var rt;
+    window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { size(); if (reduce) { step(0, 1); draw(); } }, 120); });
+    document.addEventListener("visibilitychange", function () { last = 0; });
     size();
-    if (reduce) draw(); else requestAnimationFrame(loop);
+    if (reduce) { step(0, 1); draw(); } else requestAnimationFrame(loop);
   })();
 
   /* 2. Cursor glow + ring */
@@ -341,9 +412,9 @@
 
   /* 4. Scroll reveal (staggered) */
   var revealSel = [
-    ".hero-copy > *", ".hero-visual", ".marquee-duo", ".sc-head > *", ".home-about .pr-about", ".sec-head", ".strip > .photo",
+    ".hero-copy > *", ".hero-visual", ".marquee-duo", ".works-grid > .work-card", ".home-about .pr-about", ".sec-head", ".strip > .photo",
     ".plate-head .ph-copy > *", ".ph-orbit", ".about-intro > *", ".about-intro .prose > *", ".two > *", ".comp-grid > .comp", ".comp-tags > li", ".ruled > li",
-    ".bento > .unit", ".gallery > .photo", ".post-card", ".post-head", ".post .article", ".contact-grid > *", ".c-list > li",
+    ".gallery > .photo", ".post-card", ".post-head", ".post .article", ".contact-grid > *", ".c-list > li",
     ".form .field", ".form-foot", ".map", ".foot-mark", ".foot-inner > *"
   ].join(",");
   var targets = Array.prototype.slice.call(document.querySelectorAll(revealSel));
@@ -386,69 +457,7 @@
     counters.forEach(function (el) { cio.observe(el); });
   }
 
-  /* 6. Home showcase: on wide screens the vertical scroll drives the project
-        track sideways (the section is made tall and its inner frame sticks).
-        Elsewhere it stays a native swipe/scroll-snap row. Each panel gets --p,
-        its closeness to the centre (0..1), which CSS turns into focus. */
-  (function () {
-    var sec = document.querySelector(".showcase");
-    if (!sec) return;
-    var vp = sec.querySelector(".sc-viewport"), track = sec.querySelector(".sc-track"), bar = sec.querySelector(".sc-bar i");
-    if (!vp || !track) return;
-    var panels = Array.prototype.slice.call(track.children);
-    var wide = window.matchMedia("(min-width: 900px)");
-    var pinned = false, dist = 0, ticking = false;
-    var update = function () {
-      ticking = false;
-      var p;
-      if (pinned) {
-        p = dist ? Math.min(1, Math.max(0, -sec.getBoundingClientRect().top / dist)) : 0;
-        track.style.transform = "translate3d(" + (-p * dist).toFixed(1) + "px,0,0)";
-      } else {
-        var max = vp.scrollWidth - vp.clientWidth;
-        p = max > 0 ? vp.scrollLeft / max : 0;
-      }
-      if (bar) bar.style.transform = "scaleX(" + p.toFixed(4) + ")";
-      if (reduce) return;
-      var w = window.innerWidth, cx = w / 2;
-      panels.forEach(function (el) {
-        var b = el.getBoundingClientRect();
-        var d = Math.abs(b.left + b.width / 2 - cx) / (w * .62);
-        el.style.setProperty("--p", Math.max(0, 1 - d).toFixed(3));
-      });
-    };
-    var request = function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
-    var measure = function () {
-      pinned = wide.matches && !reduce;
-      sec.classList.toggle("is-pinned", pinned);
-      if (pinned) {
-        track.style.transform = "";
-        dist = Math.max(0, track.scrollWidth - window.innerWidth);
-        sec.style.height = (sec.querySelector(".sc-pin").offsetHeight + dist) + "px";
-      } else {
-        sec.style.height = "";
-        track.style.transform = "";
-      }
-      update();
-    };
-    window.addEventListener("scroll", request, { passive: true });
-    vp.addEventListener("scroll", request, { passive: true });
-    var rt;
-    window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(measure, 120); });
-    if (wide.addEventListener) wide.addEventListener("change", measure);
-    window.addEventListener("load", measure);
-    /* keyboard: tabbing into a panel scrolls the page to where that panel is centred */
-    track.addEventListener("focusin", function (e) {
-      if (!pinned) return;
-      var el = e.target.closest(".sc-panel");
-      if (!el) return;
-      var i = panels.indexOf(el), top = sec.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo(0, top + dist * (i / Math.max(1, panels.length - 1)));
-    });
-    measure();
-  })();
-
-  /* 7. Navbar state + scroll progress */
+  /* 6. Navbar state + scroll progress */
   var navbar = document.querySelector(".navbar");
   var prog = document.querySelector(".progress");
   var ticking = false;

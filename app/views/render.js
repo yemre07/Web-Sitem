@@ -76,7 +76,7 @@
     projects: { tr: "tr/projeler.html", en: "en/projects.html" },
     about: { tr: "tr/hakkimda.html", en: "en/about.html" }
   };
-  var BENTO = ["xl", "h", "h", "v", "v", "v"];
+  var ARROW = '<svg class="arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
   var SOCIAL = {
     ig: '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Zm5.3-4.1a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6Z"/></svg>',
     li: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM2.5 9h3v12h-3zM9 9h2.9v1.7c.5-.9 1.7-1.9 3.6-1.9 3.6 0 4.5 2.3 4.5 5.4V21h-3v-6c0-1.5-.3-3.1-2.2-3.1S12 13.3 12 15v6H9z"/></svg>',
@@ -96,12 +96,18 @@
   };
 
   /* ---------- cards ---------- */
-  function unitCard(L, p, i, lazy) {
-    var cat = p.cat === "code" ? "code" : "design";
-    return '<article class="unit glass tilt ' + (BENTO[i] || "v") + '" data-cat="' + cat + '" id="' + esc(p.id) + '">\n  ' + bigIcon(cat) +
-      '\n  <div class="unit-media"><img src="' + safeUrl(p.img) + '" alt="' + esc(loc(p, L, "alt") || loc(p, L, "title")) + '"' + dims(p, 800, 600) + (lazy ? ' loading="lazy"' : "") + "></div>" +
-      '\n  <div class="unit-side">\n  <div class="unit-labels"><span class="no">U-' + num(i + 1) + "</span><span>" + esc(p.tools || T(L, "Uygulama", "App")) + '</span><span class="ty">' + typeLabel(L, cat) + "</span></div>" +
-      '\n  <div class="unit-body"><h2>' + esc(loc(p, L, "title")) + "</h2><p>" + esc(loc(p, L, "desc")) + "</p></div>\n  </div>\n</article>";
+  /* One project card for the home grid and the projects page.
+     o.h: heading tag · o.link: card links to the projects page · o.id: anchor id · o.lazy */
+  function workCard(L, p, o) {
+    o = o || {};
+    var cat = p.cat === "code" ? "code" : "design", h = o.h || "h3";
+    var title = esc(loc(p, L, "title"));
+    var img = '<img src="' + safeUrl(p.img) + '" alt="' + (o.link ? "" : esc(loc(p, L, "alt") || loc(p, L, "title"))) + '"' + dims(p, 800, 600) + (o.lazy ? ' loading="lazy"' : "") + ">";
+    var media = o.link ? '<a class="work-media" href="' + o.link + '" tabindex="-1" aria-hidden="true">' + img + "</a>" : '<div class="work-media">' + img + "</div>";
+    return '<article class="work-card" data-cat="' + cat + '"' + (o.id ? ' id="' + esc(o.id) + '"' : "") + ">\n  " + media +
+      '\n  <div class="work-body">\n    <p class="work-meta"><span class="ty">' + typeLabel(L, cat) + "</span>" + (p.tools ? "<span>" + esc(p.tools) + "</span>" : "") + "</p>" +
+      "\n    <" + h + ' class="work-title">' + (o.link ? '<a href="' + o.link + '">' + title + "</a>" : title) + "</" + h + ">" +
+      '\n    <p class="work-desc">' + esc(loc(p, L, "desc")) + "</p>\n  </div>\n</article>";
   }
   function photoFig(L, ph, i, o) {
     o = o || {};
@@ -113,15 +119,6 @@
     return '<figure class="photo glass">\n  ' + fx(media, [tag, "F-" + num(i + 1)]) +
       "\n  <figcaption><" + h + ">" + title + "</" + h + "><p>" + cap + '</p><div class="ticket"><span>' + tag + "</span><b>F-" + num(i + 1) + "</b></div></figcaption>\n</figure>";
   }
-  function plateUnit(L, p, i, n) {
-    var cat = p.cat === "code" ? "code" : "design";
-    var link = esc(resolve(PAGE.projects[L])) + "#" + esc(p.id);
-    return '<article class="pr-unit glass tilt">\n    ' + bigIcon(cat) +
-      '\n    <a class="pr-media" href="' + link + '" tabindex="-1" aria-hidden="true"><img src="' + safeUrl(p.img) + '" alt=""' + dims(p, 800, 600) + "></a>" +
-      '\n    <h2><span class="pn">' + num(n) + '</span><a href="' + link + '">' + esc(loc(p, L, "title")) + "</a></h2>" +
-      "\n    <p>" + esc(loc(p, L, "desc")) + "</p>" +
-      '\n    <div class="pr-foot"><span class="no">U-' + num(i + 1) + "</span><span>" + typeLabel(L, cat) + "</span></div>\n  </article>";
-  }
   var MONTHS = {
     tr: ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"],
     en: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -131,12 +128,14 @@
     if (p.length !== 3) return esc(d);
     return +p[2] + " " + MONTHS[L][+p[1] - 1] + " " + p[0];
   };
-  var featuredList = function (d) {
+  /* Featured projects first (in their set order), topped up with the rest up to n */
+  var featuredList = function (d, n) {
     var all = d.projects.map(function (p, i) { return { p: p, i: i }; });
     var picked = all.filter(function (x) { return +x.p.featured > 0; }).sort(function (a, b) { return a.p.featured - b.p.featured; });
-    all.forEach(function (x) { if (picked.length < 3 && picked.indexOf(x) < 0) picked.push(x); });
-    return picked.slice(0, 3);
+    all.forEach(function (x) { if (picked.length < n && picked.indexOf(x) < 0) picked.push(x); });
+    return picked.slice(0, n);
   };
+  var SHOWCASE_COUNT = 4; /* even number keeps the 2-column grid closed */
 
   /* ---------- section renderers (key = data-cms attribute) ---------- */
   var R = {
@@ -152,30 +151,16 @@
     /* Home: the short "about me" panel */
     homeBento: function (L, d) {
       return '\n  <div class="pr-about glass tilt soft">\n    ' + bigIcon("person") +
-        '\n    <div class="pa-head"><h2 id="pr-title">' + T(L, "Kısaca ben", "Me, in short") + "</h2>" +
+        '\n    <div class="pa-head"><h2 id="pr-title">' + T(L, "Profil", "Profile") + "</h2>" +
         "\n    <p>" + esc(d.about.summary[L] || d.about.summary.tr) + "</p>" +
-        '\n    <a class="link" href="' + esc(resolve(PAGE.about[L])) + '">' + T(L, "Hakkımda", "About me") + " " + u("diamond") + "</a></div>" +
+        '\n    <a class="link" href="' + esc(resolve(PAGE.about[L])) + '">' + T(L, "Özgeçmiş", "Résumé") + " " + ARROW + "</a></div>" +
         '\n    <ul class="facts">\n' + d.about.facts.map(function (f) { var x = f[L] || f.tr; return "      <li><span>" + esc(x[0]) + "</span>" + esc(x[1]) + "</li>"; }).join("\n") + "\n    </ul>\n  </div>\n";
     },
-    /* Home: horizontally scrolling project showcase (featured first, then the rest) */
+    /* Home: selected work grid (featured first) */
     showcase: function (L, d) {
-      var order = featuredList(d);
-      d.projects.forEach(function (p, i) { if (!order.some(function (x) { return x.i === i; })) order.push({ p: p, i: i }); });
-      var total = num(order.length);
-      return order.map(function (x, k) {
-        var p = x.p, cat = p.cat === "code" ? "code" : "design";
-        var link = esc(resolve(PAGE.projects[L])) + "#" + esc(p.id);
-        return '\n  <article class="sc-panel" data-cat="' + cat + '">' +
-          '\n    <a class="sc-media" href="' + link + '" tabindex="-1" aria-hidden="true"><img src="' + safeUrl(p.img) + '" alt=""' + dims(p, 800, 600) + ' loading="lazy"></a>' +
-          '\n    <div class="sc-copy"><p class="sc-meta"><span class="sc-no">' + num(k + 1) + " / " + total + "</span><span>" + typeLabel(L, cat) + "</span></p>" +
-          '\n    <h3><a href="' + link + '">' + esc(loc(p, L, "title")) + "</a></h3>" +
-          "\n    <p>" + esc(loc(p, L, "desc")) + "</p>" +
-          (p.tools ? '\n    <p class="sc-tools">' + esc(p.tools) + "</p>" : "") + "</div>\n  </article>";
-      }).join("") + "\n";
-    },
-    featuredNote: function (L, d) {
-      var f = featuredList(d).length, n = d.projects.length;
-      return T(L, "Öne çıkan " + f + " proje · toplam " + n, f + " featured projects · " + n + " in total");
+      return "\n" + featuredList(d, SHOWCASE_COUNT).map(function (x) {
+        return workCard(L, x.p, { link: esc(resolve(PAGE.projects[L])) + "#" + esc(x.p.id), lazy: true });
+      }).join("\n") + "\n";
     },
     galleryCount: function (L, d) { return String(d.gallery.length); },
     strip: function (L, d) {
@@ -185,10 +170,10 @@
       return d.gallery.map(function (ph, i) { return photoFig(L, ph, i, { lazy: i > 2, h: "h2" }); }).join("\n");
     },
     projects: function (L, d) {
-      return d.projects.map(function (p, i) { return unitCard(L, p, i, i > 2); }).join("\n");
+      return d.projects.map(function (p, i) { return workCard(L, p, { h: "h2", id: p.id, lazy: i > 3 }); }).join("\n");
     },
     projectCount: function (L, d) {
-      return T(L, "{n} proje gösteriliyor", "Showing {n} projects").replace("{n}", d.projects.length);
+      return T(L, "{n} proje", "{n} projects").replace("{n}", d.projects.length);
     },
     blogCards: function (L, d) {
       return d.blog.map(function (a) {
@@ -283,5 +268,5 @@
   };
   R.mapTitle = function (L, d) { return T(L, "Harita: ", "Map: ") + (prof(d).mapQuery || place(L, d)); };
 
-  g.SiteRender = { R: R, u: u, fx: fx, bigIcon: bigIcon, esc: esc, safeUrl: safeUrl, resolve: resolve, setBase: setBase, num: num, T: T, units: Object.keys(U) };
+  g.SiteRender = { R: R, u: u, fx: fx, arrow: ARROW, bigIcon: bigIcon, esc: esc, safeUrl: safeUrl, resolve: resolve, setBase: setBase, num: num, T: T, units: Object.keys(U) };
 })(typeof window !== "undefined" ? window : globalThis);

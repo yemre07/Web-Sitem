@@ -5,7 +5,7 @@
 import "../models/content.js";
 import "./render.js";
 const D = globalThis.SITE_DEFAULTS;
-const { R, u, fx, bigIcon, setBase } = globalThis.SiteRender;
+const { R, u, fx, bigIcon, setBase, arrow: ARROW } = globalThis.SiteRender;
 
 const ICON = {
   menu: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0 16 8 8 16 0 8Zm0 4L4 8l4 4 4-4Z" fill="currentColor" fill-rule="evenodd"/></svg>',
@@ -137,7 +137,7 @@ function footer(L) {
       <p>${T(L, "Akdeniz Üniversitesi Bilgisayar Programcılığı öğrencisi. Python, yapay zekâ ve görsel tasarım.", "Computer Programming student at Akdeniz University. Python, AI and visual design.")}</p>
       <div class="social-row" data-cms="footSocial">${R.footSocial(L, D)}</div>
     </div>
-    <div><h3>${T(L, "Levhalar", "Plates")}</h3><ul class="cols2">${PAGES.map((p) => `<li><a href="${rel(p[L][0])}">${p[L][1]}</a></li>`).join("")}</ul></div>
+    <div><h3>${T(L, "Sayfalar", "Pages")}</h3><ul class="cols2">${PAGES.map((p) => `<li><a href="${rel(p[L][0])}">${p[L][1]}</a></li>`).join("")}</ul></div>
     <div><h3>${T(L, "İletişim", "Contact")}</h3><ul data-cms="footContact">${R.footContact(L, D)}</ul></div>
   </div>
   <div class="foot-base"><span>© 2026 Yunus Emre Ersoy · ${T(L, "Tüm hakları saklıdır", "All rights reserved")}</span><span>${T(L, "Vize projesi · Akdeniz Üniversitesi", "Midterm project · Akdeniz University")}</span><a class="admin-link" href="${rel(ADMIN)}" rel="nofollow">Admin</a></div>
@@ -164,11 +164,11 @@ function home(L) {
     <div class="divider" aria-hidden="true">${u("diamond")}</div>
     <p class="role">${T(L, "Bilgisayar Programcılığı · Python · Görsel Tasarım", "Computer Programming · Python · Visual Design")}<br>Akdeniz ${T(L, "Üniversitesi", "University")} · Antalya</p>
     <p class="intro">${T(L,
-      "Akdeniz Üniversitesi Bilgisayar Programcılığı bölümünde okuyorum. Python ve yapay zekâya odaklanıyor, boş kalan her saatimi Photoshop'ta renk ve ışıkla geçiriyorum. Burada kod ve tasarım çalışmalarımı, fotoğraflarımı ve yazılarımı bulacaksınız.",
-      "I study Computer Programming at Akdeniz University. I focus on Python and artificial intelligence, and spend my spare hours on colour and light in Photoshop. Here you'll find my code and design work, my photos and my writing.")}</p>
+      "Akdeniz Üniversitesi'nde Bilgisayar Programcılığı okuyorum. Python ve yapay zekâ ile geliştiriyor, Photoshop'ta renk ve ışıkla görsel üretiyorum. Kodu ve tasarımı aynı işin iki yarısı olarak görüyorum.",
+      "Computer Programming at Akdeniz University. I build with Python and AI, and shape colour and light in Photoshop. Code and design, treated as two halves of the same work.")}</p>
     <div class="actions">
-      <a class="btn" href="${href("projects", L)}">${u("diamond")}${T(L, "Çalışmalarımı gör", "See the work")}${u("diamond")}</a>
-      <a class="link" href="${href("contact", L)}">${T(L, "Bana yazın", "Write to me")} ${u("diamond")}</a>
+      <a class="btn" href="${href("projects", L)}">${u("diamond")}${T(L, "Projeler", "Projects")}${u("diamond")}</a>
+      <a class="link" href="${href("contact", L)}">${T(L, "İletişime geçin", "Get in touch")} ${ARROW}</a>
     </div>
     <ul class="hero-stats" data-cms="heroStats">${R.heroStats(L, D)}</ul>
   </div>
@@ -179,26 +179,19 @@ function home(L) {
       <figcaption><span>Yunus Emre Ersoy</span><span>Antalya · 2006</span></figcaption>
     </figure>
   </div>
-  <a class="scroll-cue" href="#sc-title" aria-label="${T(L, "Aşağı kaydır", "Scroll down")}"><span></span></a>
+  <a class="scroll-cue" href="#sc-title" aria-label="${T(L, "Seçili işlere geç", "Skip to selected work")}"><span></span></a>
 </section>
 <div class="marquee-duo">${marquee(L, "big")}${marquee(L, "alt", [...MQ[L]].reverse())}</div>
 
-<section class="showcase" aria-labelledby="sc-title">
-  <div class="sc-pin">
-    <header class="wrap sc-head">
-      <h2 class="h-section" id="sc-title">${T(L, "Seçili işler", "Selected work")}</h2>
-      <p class="label sc-note" data-cms="featuredNote">${R.featuredNote(L, D)}</p>
-      <a class="link" href="${href("projects", L)}">${T(L, "Tüm projeler", "All projects")} ${u("diamond")}</a>
-    </header>
-    <div class="sc-viewport" tabindex="0" aria-label="${T(L, "Projeler, yatay kaydırılır", "Projects, scrolls sideways")}"><div class="sc-track" data-cms="showcase">${R.showcase(L, D)}</div></div>
-    <div class="wrap sc-foot" aria-hidden="true"><span class="sc-bar"><i></i></span><span class="label sc-hint">${T(L, "Aşağı kaydırdıkça işler yana akar", "Scroll down and the work slides past")}</span></div>
-  </div>
+<section class="wrap sec works" aria-labelledby="sc-title">
+  ${secHead(`<span id="sc-title">${T(L, "Seçili işler", "Selected work")}</span>`, `<a class="link" href="${href("projects", L)}">${T(L, "Tüm projeler", "All projects")} ${ARROW}</a>`)}
+  <div class="works-grid" data-cms="showcase">${R.showcase(L, D)}</div>
 </section>
 
 <section class="wrap sec home-about" aria-labelledby="pr-title" data-cms="homeBento">${R.homeBento(L, D)}</section>
 
 <section class="wrap sec" aria-labelledby="gal-title">
-  ${secHead(`<span id="gal-title">${T(L, "Galeriden kareler", "From the gallery")}</span>`, `<a class="link" href="${href("gallery", L)}"><span>${T(L, "Galeriyi aç", "Open the gallery")} (<span data-cms="galleryCount">${R.galleryCount(L, D)}</span>)</span> ${u("diamond")}</a>`)}
+  ${secHead(`<span id="gal-title">${T(L, "Galeriden kareler", "From the gallery")}</span>`, `<a class="link" href="${href("gallery", L)}"><span>${T(L, "Tüm galeri", "Full gallery")} (<span data-cms="galleryCount">${R.galleryCount(L, D)}</span>)</span> ${ARROW}</a>`)}
   <div class="strip" data-cms="strip">${R.strip(L, D)}</div>
 </section>`;
   return shell(L, "home", {
@@ -211,7 +204,7 @@ function home(L) {
 /* ---------------- ABOUT ---------------- */
 function about(L) {
   begin(PAGES.find((p) => p.key === "about")[L][0]);
-  const body = `${plateHead(L, "about", T(L, "Hakkımda", "About me"), T(L, "Yaratıcı bir zihin, analitik çözümler ve bitmeyen bir öğrenme isteği.", "A creative mind, analytical solutions and a never-ending wish to learn."))}
+  const body = `${plateHead(L, "about", T(L, "Hakkımda", "About me"), T(L, "Analitik düşünce, görsel üretim, sürekli öğrenme.", "Analytical thinking, visual craft, constant learning."))}
 
 <section class="wrap sec" aria-labelledby="intro-title">
   <div class="about-intro">
@@ -220,12 +213,12 @@ function about(L) {
       <h2 class="h-section" id="intro-title">${T(L, "Merhaba, ben Yunus Emre", "Hello, I'm Yunus Emre")}</h2>
       <div class="divider" aria-hidden="true">${u("diamond")}</div>
       <div class="prose" data-cms="bio">${R.bio(L, D)}</div>
-      <div class="actions" style="margin-top:28px"><a class="btn" href="${href("projects", L)}">${u("diamond")}${T(L, "Çalışmalarıma göz at", "Browse my work")}${u("diamond")}</a></div>
+      <div class="actions" style="margin-top:28px"><a class="btn" href="${href("projects", L)}">${u("diamond")}${T(L, "Projeler", "Projects")}${u("diamond")}</a></div>
     </div>
   </div>
 </section>
 
-<section class="wrap sec" style="padding-top:0" aria-labelledby="cv-title">
+<section class="wrap sec" aria-labelledby="cv-title">
   ${secHead(`<span id="cv-title">${T(L, "Özgeçmiş", "Résumé")}</span>`)}
   <div class="two">
     <div class="glass panel tilt soft">
@@ -245,12 +238,12 @@ function about(L) {
   </div>
 </section>
 
-<section class="wrap sec" style="padding-top:0" id="yetenekler" aria-labelledby="skills-title">
+<section class="wrap sec" id="yetenekler" aria-labelledby="skills-title">
   ${secHead(`<span id="skills-title">${T(L, "Yetkinlik alanları", "Areas of practice")}</span>`)}
   <div class="comp-grid" data-cms="competencies">${R.competencies(L, D)}</div>
 </section>
 
-<section class="wrap sec" style="padding-top:0" aria-labelledby="int-title">
+<section class="wrap sec" aria-labelledby="int-title">
   ${secHead(`<span id="int-title">${T(L, "İlgi alanlarım", "Interests")}</span>`)}
   <ol class="ruled" data-cms="interests">${R.interests(L, D)}</ol>
 </section>`;
@@ -264,7 +257,7 @@ function about(L) {
 /* ---------------- PROJECTS ---------------- */
 function projects(L) {
   begin(PAGES.find((p) => p.key === "projects")[L][0]);
-  const body = `${plateHead(L, "projects", T(L, "Projeler", "Projects"), T(L, "Fikir aşamasından bitmiş işe kadar üzerinde çalıştığım projeler. Her biri hem teknik gelişimimi hem de problem çözme yaklaşımımı gösteriyor.", "Projects I've worked on from idea to finished piece. Each one shows both my technical growth and how I approach a problem."))}
+  const body = `${plateHead(L, "projects", T(L, "Projeler", "Projects"), T(L, "Tasarım ve yazılım işleri; ilk fikirden bitmiş ürüne.", "Design and software work, from first idea to finished piece."))}
 <section class="wrap sec" aria-label="${T(L, "Proje listesi", "Project list")}">
   <div class="sec-head" style="align-items:center">
     <div class="filters" role="group" aria-label="${T(L, "Projeleri filtrele", "Filter projects")}" data-filter-group="projects">
@@ -272,9 +265,9 @@ function projects(L) {
       <button type="button" data-filter="design" aria-pressed="false">${T(L, "Tasarım", "Design")}</button>
       <button type="button" data-filter="code" aria-pressed="false">${T(L, "Yazılım", "Code")}</button>
     </div>
-    <p class="label" aria-live="polite" data-project-count data-template="${T(L, "{n} proje gösteriliyor", "Showing {n} projects")}">${R.projectCount(L, D)}</p>
+    <p class="label" aria-live="polite" data-project-count data-template="${T(L, "{n} proje", "{n} projects")}">${R.projectCount(L, D)}</p>
   </div>
-  <div class="grid-units bento" data-cms="projects">${R.projects(L, D)}</div>
+  <div class="grid-units works-grid" data-cms="projects">${R.projects(L, D)}</div>
 </section>`;
   return shell(L, "projects", {
     title: T(L, "Projeler · Yunus Emre Ersoy", "Projects · Yunus Emre Ersoy"),
@@ -286,7 +279,7 @@ function projects(L) {
 /* ---------------- GALLERY ---------------- */
 function gallery(L) {
   begin(PAGES.find((p) => p.key === "gallery")[L][0]);
-  const body = `${plateHead(L, "gallery", T(L, "Galeri", "Gallery"), T(L, "Hayatımın farklı anlarından beni anlatan kareler. Büyütmek için fotoğrafa dokunun.", "Moments from different parts of my life. Tap a photo to enlarge it."))}
+  const body = `${plateHead(L, "gallery", T(L, "Galeri", "Gallery"), T(L, "Hayatımın farklı dönemlerinden kareler.", "Frames from different chapters of my life."))}
 <section class="wrap sec" aria-label="${T(L, "Fotoğraflar", "Photos")}">
   <div class="gallery" data-cms="gallery">${R.gallery(L, D)}</div>
 </section>
@@ -307,7 +300,7 @@ function blog(L) {
   begin(PAGES.find((p) => p.key === "blog")[L][0]);
   const body = `<div class="blog">
 <div class="post-list">
-${plateHead(L, "blog", "Blog", T(L, "Yazılım, tasarım ve web üzerine notlarım. Bir kategoriye ya da etikete tıklayarak yazıları filtreleyebilirsiniz.", "Notes on software, design and the web. Click a category or tag to filter the articles."))}
+${plateHead(L, "blog", "Blog", T(L, "Yazılım, tasarım ve web üzerine notlar.", "Notes on software, design and the web."))}
 <section class="wrap sec" aria-label="${T(L, "Yazılar", "Articles")}">
   <div class="post-index" data-cms="blogCards">${R.blogCards(L, D)}</div>
   <p class="filter-note" aria-live="polite"></p>
@@ -325,7 +318,7 @@ ${plateHead(L, "blog", "Blog", T(L, "Yazılım, tasarım ve web üzerine notlar�
 /* ---------------- CONTACT ---------------- */
 function contact(L) {
   begin(PAGES.find((p) => p.key === "contact")[L][0]);
-  const body = `${plateHead(L, "contact", T(L, "İletişim", "Contact"), T(L, "Staj, proje fikri ya da bir soru: aşağıdaki formdan yazın veya doğrudan arayın.", "An internship, a project idea or a question: write through the form below or call me directly."))}
+  const body = `${plateHead(L, "contact", T(L, "İletişim", "Contact"), T(L, "Staj, iş birliği ya da yeni bir proje için.", "Internships, collaborations and new projects."))}
 <section class="wrap sec" aria-label="${T(L, "İletişim bilgileri ve form", "Contact details and form")}">
   <div class="contact-grid">
     <div class="contact-info glass">
@@ -334,8 +327,7 @@ function contact(L) {
       <ul class="c-list" data-cms="contactList">${R.contactList(L, D)}</ul>
     </div>
     <div class="contact-form glass">
-      <h2 class="h-sub" style="margin-bottom:8px">${T(L, "Mesaj gönderin", "Send a message")}</h2>
-      <p class="muted" style="margin-bottom:22px">${T(L, "Gönder'e bastığınızda mesajınız kaydedilir ve e-posta uygulamanızda hazır olarak açılır.", "When you press Send, your message is saved and opens ready to go in your email app.")}</p>
+      <h2 class="h-sub" style="margin-bottom:22px">${T(L, "Mesaj", "Message")}</h2>
       <form id="contact-form" class="form" novalidate>
         <div class="field"><label for="f-name">${T(L, "Adınız", "Your name")}</label><input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name"><span class="err" id="e-name" aria-live="polite"></span></div>
         <div class="field"><label for="f-email">${T(L, "E-posta adresiniz", "Your email")}</label><input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email" placeholder="${T(L, "ad@ornek.com", "name@example.com")}"><span class="err" id="e-email" aria-live="polite"></span></div>
